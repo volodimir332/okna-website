@@ -42,11 +42,23 @@ gtag('config', 'G-1Y5RPX6HM7');</script><script>(function(w,d,s,l,i){
 </div>
 <script>
 (function(){
-if(!sessionStorage.getItem('promo10')){
+var done=localStorage.getItem('promo_done');
+if(done)return;
+var cnt=parseInt(localStorage.getItem('promo_cnt')||'0');
+if(cnt>=3)return;
+if(sessionStorage.getItem('promo_ses'))return;
 setTimeout(function(){
 var el=document.getElementById('promo-popup-overlay');
-if(el){el.style.display='flex';sessionStorage.setItem('promo10','1');}
-},10000);
+if(el){
+el.style.display='flex';
+localStorage.setItem('promo_cnt',String(cnt+1));
+sessionStorage.setItem('promo_ses','1');
 }
+},10000);
 })();
+document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('.form').forEach(function(f){
+f.addEventListener('submit',function(){localStorage.setItem('promo_done','1');});
+});
+});
 </script></body></html>
