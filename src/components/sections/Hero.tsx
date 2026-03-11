@@ -92,9 +92,9 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
       />
 
-      {/* Worker image — behind text on mobile, in front on desktop */}
+      {/* Worker image — hidden on mobile, visible on desktop */}
       <motion.div
-        className="absolute -right-8 sm:right-2 lg:right-4 xl:right-16 2xl:right-24 bottom-16 sm:bottom-0 z-[5] sm:z-20 pointer-events-none"
+        className="absolute hidden sm:block sm:right-2 lg:right-4 xl:right-16 2xl:right-24 sm:bottom-0 z-20 pointer-events-none"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 1.5 }}
@@ -104,7 +104,7 @@ export function Hero() {
           alt="OBK pracovník"
           width={440}
           height={800}
-          className="object-contain drop-shadow-2xl w-[356px] sm:w-[260px] md:w-[300px] lg:w-[440px] h-auto"
+          className="object-contain drop-shadow-2xl sm:w-[260px] md:w-[300px] lg:w-[440px] h-auto"
           priority
         />
       </motion.div>
