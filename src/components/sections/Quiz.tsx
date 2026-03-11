@@ -74,7 +74,7 @@ const questions = [
   },
 ];
 
-const BASE_PRICE = 85000;
+const BASE_PRICE = 55000;
 
 export function Quiz() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -271,12 +271,12 @@ export function Quiz() {
             >
               {/* Price Display */}
               <div className="mb-8">
-                <p className="text-gray-400 text-sm mb-3">Orientační cena rekonstrukce</p>
+                <p className="text-gray-400 text-sm mb-3">Orientační cena práce (bez materiálu)</p>
                 <p className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
-                  {formatPrice(calculatedPrice)}
+                  cca {formatPrice(calculatedPrice)}
                 </p>
                 <p className="text-gray-400 text-xs">
-                  * Konečná cena může být upřesněna po osobní prohlídce
+                  * Cena bez DPH a bez materiálu. Přesnou kalkulaci připravíme po zaměření.
                 </p>
               </div>
 

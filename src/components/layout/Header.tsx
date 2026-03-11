@@ -1,31 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#jak-to-funguje", label: "Jak to funguje", isExternal: false },
-  { href: "#balicky", label: "Balíčky", isExternal: false },
-  { href: "#galerie", label: "Realizace", isExternal: false },
-  { href: "/blog", label: "Blog", isExternal: true },
+  { href: "/sluzby/rekonstrukce-koupelny", label: "Rekonstrukce", isExternal: true },
+  { href: "#svet-kamene", label: "Kámen", isExternal: false },
+  { href: "/cenik", label: "Ceník", isExternal: true },
+  { href: "/realizace", label: "Realizace", isExternal: true },
   { href: "#kontakt", label: "Kontakt", isExternal: false },
 ];
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Close mobile menu on resize
   useEffect(() => {
@@ -55,33 +46,30 @@ export function Header() {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // On sub-pages, redirect to home page with anchor
+      window.location.href = `/${href}`;
     }
   };
 
   return (
     <>
-      <motion.header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-gray-200"
-            : "bg-transparent"
-        )}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200"
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
-              <span className="text-xl md:text-2xl font-bold text-[var(--text-primary)]">
-                Koupelna
-              </span>
-              <span className="text-xl md:text-2xl font-light text-[var(--text-tertiary)]">
-                Ostrava
-              </span>
-            </a>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/logos/logo.png"
+                alt="Koupelna Ostrava"
+                width={150}
+                height={100}
+                className="h-10 md:h-12 w-auto"
+                priority
+              />
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
@@ -90,7 +78,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-sm font-medium"
+                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-[15px] font-semibold"
                   >
                     {link.label}
                   </Link>
@@ -98,7 +86,7 @@ export function Header() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-sm font-medium"
+                    className="relative text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-[15px] font-semibold"
                   >
                     {link.label}
                   </button>
@@ -109,16 +97,16 @@ export function Header() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-4">
               <a
-                href="tel:+420123456789"
+                href="tel:+420737540605"
                 className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span className="text-sm font-medium">+420 123 456 789</span>
+                <span className="text-sm font-medium">+420 737 540 605</span>
               </a>
               <Button
                 variant="violet"
                 size="md"
-                onClick={() => scrollToSection("#kviz")}
+                onClick={() => scrollToSection("#kontakt")}
               >
                 Spočítat cenu
               </Button>
@@ -138,7 +126,7 @@ export function Header() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -187,7 +175,7 @@ export function Header() {
                     <motion.button
                       key={link.href}
                       onClick={() => scrollToSection(link.href)}
-                      className="block w-full text-left px-4 py-3 text-lg font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-lg transition-colors"
+                      className="relative block w-full text-left px-4 py-3 text-lg font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-lg transition-colors"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
@@ -199,17 +187,17 @@ export function Header() {
 
                 <div className="pt-4 mt-4 border-t border-[var(--border)] space-y-3">
                   <a
-                    href="tel:+420123456789"
+                    href="tel:+420737540605"
                     className="flex items-center gap-3 px-4 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                   >
                     <Phone className="w-5 h-5" />
-                    <span className="font-medium">+420 123 456 789</span>
+                    <span className="font-medium">+420 737 540 605</span>
                   </a>
                   <div className="px-4">
                     <Button
                       variant="violet"
                       className="w-full"
-                      onClick={() => scrollToSection("#kviz")}
+                      onClick={() => scrollToSection("#kontakt")}
                     >
                       Spočítat cenu
                     </Button>

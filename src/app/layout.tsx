@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -18,16 +19,15 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
   themeColor: "#FAFAFA",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://koupelna-ostrava.cz"),
+  metadataBase: new URL("https://obklady-ostrava.cz"),
   title: {
-    default: "Rekonstrukce koupelny Ostrava | Na klíč od 39 000 Kč | Záruka 60 měsíců",
-    template: "%s | Koupelna Ostrava"
+    default: "Rekonstrukce koupelny Ostrava na klíč | Záruka 60 měsíců | OBK",
+    template: "%s | Obklady Ostrava"
   },
   description:
     "Specialisté na kompletní rekonstrukce koupelen a bytových jader v Ostravě a okolí. Vlastní realizační tým bez subdodavatelů, pevná cena, hotovo v termínu. Záruka 60 měsíců. Bezplatná konzultace a 3D návrh.",
@@ -55,31 +55,31 @@ export const metadata: Metadata = {
     "orlová",
     "třinec",
   ],
-  authors: [{ name: "Koupelna Ostrava" }],
-  creator: "Koupelna Ostrava",
-  publisher: "Koupelna Ostrava",
+  authors: [{ name: "OBK - Obklady Ostrava" }],
+  creator: "OBK - Obklady Ostrava",
+  publisher: "OBK - Obklady Ostrava",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   alternates: {
-    canonical: "https://koupelna-ostrava.cz",
+    canonical: "https://obklady-ostrava.cz",
   },
   openGraph: {
     type: "website",
     locale: "cs_CZ",
-    url: "https://koupelna-ostrava.cz",
-    siteName: "Koupelna Ostrava",
-    title: "Rekonstrukce koupelny Ostrava | Na klíč od 39 000 Kč",
+    url: "https://obklady-ostrava.cz",
+    siteName: "OBK - Obklady Ostrava",
+    title: "Rekonstrukce koupelny Ostrava na klíč | OBK",
     description:
       "Specialisté na rekonstrukce koupelen v Ostravě a okolí. Vlastní tým bez subdodavatelů, pevná cena, hotovo v termínu. Záruka 60 měsíců.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Koupelna Ostrava - Rekonstrukce koupelen na klíč",
+        alt: "OBK - Rekonstrukce koupelen v Ostravě",
       },
     ],
   },
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rekonstrukce koupelny Ostrava | Na klíč",
     description: "Specialisté na rekonstrukce koupelen v Ostravě a okolí. Záruka 60 měsíců.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -100,56 +100,42 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
+  // verification: {
+  //   google: "PASTE-YOUR-REAL-CODE-HERE",
+  // },
 };
 
-// JSON-LD Schema.org structured data for Local Business
+// JSON-LD Schema.org structured data
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "HomeAndConstructionBusiness",
-      "@id": "https://koupelna-ostrava.cz/#organization",
-      "name": "Koupelna Ostrava",
-      "alternateName": "Rekonstrukce koupelen Ostrava",
-      "description": "Specialisté na kompletní rekonstrukce koupelen a bytových jader v Ostravě a okolí. Vlastní realizační tým, pevná cena, záruka 60 měsíců.",
-      "url": "https://koupelna-ostrava.cz",
-      "telephone": "+420123456789",
-      "email": "info@koupelna-ostrava.cz",
-      "priceRange": "$$-$$$",
-      "currenciesAccepted": "CZK",
-      "paymentAccepted": "Cash, Bank Transfer, Credit Card",
+      "@type": "LocalBusiness",
+      "@id": "https://obklady-ostrava.cz/#organization",
+      "name": "OBK - Obklady Ostrava",
+      "image": "https://obklady-ostrava.cz/images/logos/logo.png",
+      "telephone": "+420737540605",
+      "email": "info@obklady-ostrava.cz",
+      "url": "https://obklady-ostrava.cz",
+      "priceRange": "$",
+      "openingHours": "Mo-Fr 08:00-18:00",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Nádražní 123",
         "addressLocality": "Ostrava",
         "addressRegion": "Moravskoslezský kraj",
-        "postalCode": "702 00",
         "addressCountry": "CZ"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "49.8209",
-        "longitude": "18.2625"
+        "latitude": 49.8209,
+        "longitude": 18.2625
       },
       "areaServed": [
         { "@type": "City", "name": "Ostrava" },
         { "@type": "City", "name": "Havířov" },
         { "@type": "City", "name": "Karviná" },
         { "@type": "City", "name": "Frýdek-Místek" },
-        { "@type": "City", "name": "Opava" },
-        { "@type": "City", "name": "Orlová" },
-        { "@type": "City", "name": "Třinec" }
-      ],
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
+        { "@type": "City", "name": "Opava" }
       ],
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -158,84 +144,28 @@ const jsonLd = {
         "bestRating": "5",
         "worstRating": "1"
       },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Služby rekonstrukce koupelen",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Rekonstrukce malé koupelny",
-              "description": "Kompletní rekonstrukce malé koupelny do 4m²"
-            },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "price": "115000",
-              "priceCurrency": "CZK",
-              "minPrice": "115000",
-              "maxPrice": "160000"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Rekonstrukce standardní koupelny",
-              "description": "Kompletní rekonstrukce standardní koupelny 4-6m²"
-            },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "price": "160000",
-              "priceCurrency": "CZK",
-              "minPrice": "160000",
-              "maxPrice": "250000"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Rekonstrukce nadstandardní koupelny",
-              "description": "Kompletní rekonstrukce prostorné koupelny nad 6m²"
-            },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "price": "245000",
-              "priceCurrency": "CZK",
-              "minPrice": "245000"
-            }
-          }
-        ]
-      },
       "sameAs": [
         "https://www.facebook.com/koupelnaostrava",
         "https://www.instagram.com/koupelnaostrava"
       ]
     },
     {
-      "@type": "WebSite",
-      "@id": "https://koupelna-ostrava.cz/#website",
-      "url": "https://koupelna-ostrava.cz",
-      "name": "Koupelna Ostrava",
-      "description": "Rekonstrukce koupelen a bytových jader v Ostravě",
-      "publisher": {
-        "@id": "https://koupelna-ostrava.cz/#organization"
-      },
-      "inLanguage": "cs-CZ"
+      "@type": "Service",
+      "provider": { "@id": "https://obklady-ostrava.cz/#organization" },
+      "name": "Rekonstrukce koupelen Ostrava",
+      "description": "Kompletní rekonstrukce koupelen a bytových jader v Ostravě. Obklady, dlažby, hydroizolace, instalatérské práce.",
+      "areaServed": { "@type": "City", "name": "Ostrava" },
+      "serviceType": "Obkladačské a rekonstrukční práce"
     },
     {
-      "@type": "WebPage",
-      "@id": "https://koupelna-ostrava.cz/#webpage",
-      "url": "https://koupelna-ostrava.cz",
-      "name": "Rekonstrukce koupelny Ostrava | Na klíč od 39 000 Kč",
-      "isPartOf": {
-        "@id": "https://koupelna-ostrava.cz/#website"
+      "@type": "WebSite",
+      "@id": "https://obklady-ostrava.cz/#website",
+      "url": "https://obklady-ostrava.cz",
+      "name": "OBK - Obklady Ostrava",
+      "description": "Rekonstrukce koupelen a obkladačské práce v Ostravě",
+      "publisher": {
+        "@id": "https://obklady-ostrava.cz/#organization"
       },
-      "about": {
-        "@id": "https://koupelna-ostrava.cz/#organization"
-      },
-      "description": "Specialisté na rekonstrukce koupelen v Ostravě a okolí. Vlastní tým, pevná cena, záruka 60 měsíců.",
       "inLanguage": "cs-CZ"
     },
     {
@@ -286,6 +216,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`}
+          </Script>
+        </>
+      )}
       <body className="font-sans antialiased overflow-x-hidden w-full relative bg-[#FAFAFA]">
         <div className="w-full max-w-[100vw] overflow-x-hidden flex flex-col min-h-screen relative">
           {children}

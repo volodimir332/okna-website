@@ -62,7 +62,7 @@ export function Measurement() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                Jsme lokální specialisté, ne anonymní firma. Za každou prací stojíme osobně.
+                Výjezd na místo zdarma do 30 km od Ostravy. Nad 30 km dle dohody.
               </motion.p>
             </div>
 

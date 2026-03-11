@@ -1,22 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play, ShowerHead } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 // Full headline for typewriter
-const fullHeadline = "Rekonstrukce koupelny v Ostravě bez stresu. Na\u00A0klíč.";
+const fullHeadline = "Obklady, dlažby a kámen\nv Ostravě. Na klíč.";
 
-// Typewriter component for full headline with colored parts
 function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
   const [displayText, setDisplayText] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
-  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     const startTimeout = setTimeout(() => {
-      setIsTyping(true);
       let currentIndex = 0;
 
       const typeInterval = setInterval(() => {
@@ -25,10 +22,8 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
           currentIndex++;
         } else {
           clearInterval(typeInterval);
-          // Hide cursor after typing is done
-          setTimeout(() => setShowCursor(false), 500);
         }
-      }, 50); // Speed of typing
+      }, 50);
 
       return () => clearInterval(typeInterval);
     }, delay);
@@ -36,34 +31,28 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
     return () => clearTimeout(startTimeout);
   }, [delay]);
 
-  // Split text to color "bez stresu" part
-  const renderColoredText = () => {
-    const bezStresuStart = "Rekonstrukce koupelny v Ostravě ".length;
-    const bezStresuEnd = bezStresuStart + "bez stresu".length;
-
-    const part1 = displayText.slice(0, bezStresuStart);
-    const part2 = displayText.slice(bezStresuStart, bezStresuEnd);
-    const part3 = displayText.slice(bezStresuEnd);
-
+  const renderText = () => {
+    const lines = displayText.split('\n');
     return (
       <>
-        <span>{part1}</span>
-        <span className="text-gradient">{part2}</span>
-        <span>{part3}</span>
+        {lines.map((line, i) => (
+          <span key={i} className={i > 0 ? 'text-gradient' : undefined} style={i > 0 ? { WebkitTextFillColor: 'transparent' } : undefined}>
+            {line}
+            {i < lines.length - 1 && <br />}
+          </span>
+        ))}
       </>
     );
   };
 
   return (
     <span className="relative">
-      {renderColoredText()}
-      {showCursor && isTyping && (
-        <motion.span
-          className="inline-block w-[3px] h-[0.9em] bg-[var(--accent-warm)] ml-1 align-middle"
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-        />
-      )}
+      {renderText()}
+      <motion.span
+        className="inline-block w-[3px] h-[0.9em] bg-[#6B7AE8] ml-1 align-middle"
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+      />
     </span>
   );
 }
@@ -77,99 +66,85 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
 
-      <div className="container-custom relative z-10 px-4 sm:px-6">
-        {/* Mobile: image first, then content. Desktop: side by side */}
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-16 items-center">
+      {/* Background image — under the header */}
+      <Image
+        src="/images/hero/hero-bg.png"
+        alt="Moderní koupelna s obklady a přírodním kamenem - realizace Ostrava"
+        fill
+        className="object-cover object-top"
+        quality={100}
+        priority
+        sizes="100vw"
+      />
 
-          {/* Visual - shown first on mobile */}
-          <motion.div
-            className="relative order-1 lg:order-2 -mt-4 sm:mt-0 lg:mt-0"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* 3D Bathroom Image - increased by 15% on mobile */}
-            <div className="relative mx-auto max-w-[320px] sm:max-w-[400px] lg:max-w-none">
-              <img
-                src="/images/hero/bathroom-3d.png"
-                alt="3D vizualizace koupelny"
-                className="w-full h-auto object-contain lg:max-w-[600px] mx-auto"
-              />
-            </div>
+      {/* Dark overlay 10% */}
+      <div className="absolute inset-0 bg-black/10 z-[0] pointer-events-none" />
 
-            {/* Floating Stats Card - thick border */}
-            <motion.div
-              className="absolute bottom-2 left-2 sm:bottom-12 sm:left-4 bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-4 shadow-lg border-2 border-[#C7D2FE]"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
+      {/* Fade to white at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 z-[1] pointer-events-none"
+        style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
+      />
+
+      {/* Worker image — right side, bigger on mobile */}
+      <motion.div
+        className="absolute right-0 sm:right-2 lg:right-4 xl:right-16 2xl:right-24 bottom-12 sm:bottom-0 z-20 pointer-events-none"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
+      >
+        <Image
+          src="/images/hero/worker-obk.png"
+          alt="OBK pracovník"
+          width={440}
+          height={800}
+          className="object-contain drop-shadow-2xl w-[280px] sm:w-[260px] md:w-[300px] lg:w-[440px] h-auto"
+          priority
+        />
+      </motion.div>
+
+      {/* Content — centered on all screens */}
+      <div className="relative z-10 container-custom px-4 sm:px-6 min-h-screen flex items-start sm:items-center justify-center pt-28 sm:pt-0">
+        <motion.div
+          className="text-center flex flex-col items-center max-w-4xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="mb-3 sm:mb-4 font-bold leading-[1.1] text-white drop-shadow-lg" style={{ fontSize: 'clamp(2.6rem, 5vw, 5.5rem)' }}>
+            <span className="sr-only">Obklady, dlažby a kámen v Ostravě. Na klíč.</span>
+            <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
+          </h1>
+
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-lg px-2 sm:px-0 drop-shadow-md">
+            Výsledek uvidíte dřív, než začneme. Pevná cena. Jasný termín.
+            Vlastní realizační tým bez subdodavatelů.
+          </p>
+
+          <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-8 sm:mt-12 md:mt-16">
+            <Button
+              variant="violet"
+              size="md"
+              className="text-lg sm:text-xl px-7 sm:px-10 py-3.5 sm:py-5"
+              onClick={() => scrollToSection("#kviz")}
             >
-              <div className="flex items-center gap-1.5 sm:gap-3">
-                <ShowerHead className="w-5 h-5 sm:w-10 sm:h-10 text-[#6B7AE8]" />
-                <div>
-                  <p className="text-sm sm:text-2xl font-bold text-[var(--text-primary)]">200+</p>
-                  <p className="text-[8px] sm:text-sm text-[var(--text-secondary)]">realizací</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating Guarantee Card - thick border */}
-            <motion.div
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-4 shadow-lg border-2 border-[#C7D2FE]"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7 }}
+              Spočítat cenu
+              <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7" />
+            </Button>
+            <Button
+              variant="secondary"
+              size="md"
+              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5"
+              onClick={() => scrollToSection("#galerie")}
             >
-              <p className="text-[8px] sm:text-sm text-[var(--text-secondary)]">Záruka</p>
-              <p className="text-xs sm:text-xl font-bold text-[var(--text-primary)]">60 měsíců</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Content - shown second on mobile */}
-          <motion.div
-            className="text-center lg:text-left flex flex-col order-2 lg:order-1"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Heading with Typewriter Effect - moved up */}
-            <h1 className="mb-2 sm:mb-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-              <TypewriterHeadline delay={300} />
-            </h1>
-
-            {/* Subheading - smaller */}
-            <p className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] max-w-md mx-auto lg:mx-0 px-2 sm:px-0">
-              Výsledek uvidíte dřív, než začneme. Pevná cena. Jasný termín.
-              Vlastní realizační tým bez subdodavatelů.
-            </p>
-
-            {/* CTAs - closer to center on mobile */}
-            <div className="flex flex-row gap-2 sm:gap-4 justify-center lg:justify-start px-6 sm:px-0 mt-6 sm:mt-10 md:mt-12">
-              <Button
-                variant="violet-outline"
-                size="sm"
-                className="text-xs sm:text-sm"
-                onClick={() => scrollToSection("#kviz")}
-              >
-                Spočítat cenu
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </Button>
-              <Button
-                variant="secondary"
-                size="sm"
-                className="text-xs sm:text-sm"
-                onClick={() => scrollToSection("#galerie")}
-              >
-                <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Zobrazit realizace</span>
-                <span className="sm:hidden">Realizace</span>
-              </Button>
-            </div>
-          </motion.div>
-
-        </div>
+              <Play className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="hidden sm:inline">Zobrazit realizace</span>
+              <span className="sm:hidden">Realizace</span>
+            </Button>
+          </div>
+        </motion.div>
       </div>
 
     </section>

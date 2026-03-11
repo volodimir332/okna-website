@@ -2,39 +2,51 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-// Gallery items with descriptions about quality
+// Gallery items — mixed tile and stone for variety
 const galleryItems = [
-  { image: "/images/robota/IMG_2512.jpg", label: "PRECIZNOST", description: "Dbáme na každý detail. Spáry milimetrově přesné." },
-  { image: "/images/robota/IMG_2526.jpg", label: "KVALITA", description: "Pouze prémiové materiály od ověřených značek." },
-  { image: "/images/robota/IMG_3401.jpg", label: "TECHNOLOGIE", description: "Moderní postupy pro dokonalý výsledek." },
-  { image: "/images/robota/IMG_3549.jpg", label: "DESIGN", description: "Estetika a funkčnost v dokonalé harmonii." },
-  { image: "/images/robota/IMG_3660.jpg", label: "PROFESIONALITA", description: "Zkušený tým s 15+ lety praxe." },
-  { image: "/images/robota/IMG_3661.jpg", label: "PEČLIVOST", description: "Každá dlaždice položena s maximální péčí." },
-  { image: "/images/robota/IMG_3667.jpg", label: "SPOLEHLIVOST", description: "Termíny dodržujeme, sliby plníme." },
-  { image: "/images/robota/IMG_3670.jpg", label: "INOVACE", description: "Nejnovější trendy a technologie v oboru." },
-  { image: "/images/robota/IMG_3892.jpg", label: "ČISTOTA", description: "Pracujeme čistě, uklízíme po sobě." },
-  { image: "/images/robota/IMG_3912.jpg", label: "KOMUNIKACE", description: "Vždy víte, v jaké fázi práce jsou." },
-  { image: "/images/robota/IMG_3917.jpg", label: "ZÁRUKA", description: "60 měsíců záruka na všechny práce." },
-  { image: "/images/robota/IMG_3920.jpg", label: "MATERIÁLY", description: "RAKO, Geberit, Grohe - jen to nejlepší." },
-  { image: "/images/robota/IMG_3922.jpg", label: "ŘEMESLO", description: "Tradiční řemeslné zpracování." },
-  { image: "/images/robota/IMG_3970.jpg", label: "DETAIL", description: "V detailech se skrývá dokonalost." },
-  { image: "/images/robota/IMG_3976.jpg", label: "HARMONIE", description: "Barevné kombinace, které ladí." },
-  { image: "/images/robota/IMG_3986.jpg", label: "PROSTOR", description: "Optimální využití každého centimetru." },
-  { image: "/images/robota/IMG_3993.jpg", label: "SVĚTLO", description: "Promyšlené osvětlení pro váš komfort." },
-  { image: "/images/robota/IMG_3999.jpg", label: "ELEGANCE", description: "Nadčasový design pro vaši koupelnu." },
-  { image: "/images/robota/IMG_4135.jpg", label: "FUNKČNOST", description: "Praktická řešení pro každodenní použití." },
-  { image: "/images/robota/IMG_4170.jpg", label: "KOMFORT", description: "Vaše koupelna, váš relax." },
-  { image: "/images/robota/IMG_4397.jpg", label: "STYL", description: "Od moderního po klasický - zvládáme vše." },
-  { image: "/images/robota/IMG_4411.jpg", label: "PRECIZNOST", description: "Každý kout zpracován k dokonalosti." },
-  { image: "/images/robota/IMG_4738.jpg", label: "ODBORNOST", description: "Certifikovaní odborníci v oboru." },
-  { image: "/images/robota/IMG_5061.jpg", label: "TRADICE", description: "Stavíme na letech zkušeností." },
-  { image: "/images/robota/IMG_5062.jpg", label: "MODERNOST", description: "Sledujeme světové trendy." },
-  { image: "/images/robota/IMG_5364.jpg", label: "NADSTANDARD", description: "Vždy o krok dále než ostatní." },
-  { image: "/images/robota/IMG_5564.jpg", label: "DOKONALOST", description: "Nic není příliš malé, abychom to zanedbali." },
-  { image: "/images/robota/IMG_5749.jpg", label: "PÉČE", description: "S vaší koupelnou zacházíme jako s naší." },
-  { image: "/images/robota/IMG_5925.jpg", label: "VÝSLEDEK", description: "Koupelna, ze které se vám nechce odejít." },
-  { image: "/images/robota/IMG_6078.jpg", label: "SPOKOJENOST", description: "200+ spokojených zákazníků." },
+  { image: "/images/robota/IMG_2512.jpg", label: "Koupelna Havířov", description: "Kompletní rekonstrukce koupelny na klíč." },
+  { image: "/images/kamen/kamen-9.jpg", label: "Kamenný krb", description: "Obložení krbu přírodním pískovcem." },
+  { image: "/images/robota/IMG_2526.jpg", label: "Rekonstrukce Ostrava-Poruba", description: "Moderní koupelna s velkoformátovými obklady." },
+  { image: "/images/kamen/kamen-6.jpg", label: "Kamenná fasáda", description: "Kompletní fasáda domu z přírodního kamene." },
+  { image: "/images/robota/IMG_3401.jpg", label: "Kamenný krb Frýdek-Místek", description: "Obložení krbu přírodním kamenem." },
+  { image: "/images/robota/IMG_3549.jpg", label: "Velkoformát Opava", description: "Velkoformátové obklady pro elegantní vzhled." },
+  { image: "/images/kamen/kamen-1.jpg", label: "Kuchyně z kamene", description: "Kuchyňský ostrov s kamennou základnou." },
+  { image: "/images/robota/IMG_3660.jpg", label: "Koupelna na klíč", description: "Od návrhu po finální úklid — vše v jednom." },
+  { image: "/images/kamen/kamen-11.jpg", label: "Kamenný gril", description: "Moderní kuchyně s kamenem a podsvícením." },
+  { image: "/images/robota/IMG_3661.jpg", label: "Sprchový kout bez vany", description: "Bezbariérový sprchový kout s walk-in designem." },
+  { image: "/images/robota/IMG_3667.jpg", label: "Koupelna Karviná", description: "Klasická koupelna s moderními prvky." },
+  { image: "/images/kamen/kamen-3.jpg", label: "Kamenná stěna", description: "Dekorativní stěna z přírodního kamene." },
+  { image: "/images/robota/IMG_3670.jpg", label: "Obklady kuchyně Ostrava", description: "Precizní obklady za kuchyňskou linku." },
+  { image: "/images/kamen/kamen-10.jpg", label: "Kamenná sprcha", description: "Sprchový kout z rustikálního kamene." },
+  { image: "/images/robota/IMG_3892.jpg", label: "Koupelna Třinec", description: "Minimalistický design s důrazem na detail." },
+  { image: "/images/robota/IMG_3912.jpg", label: "Terasa Frýdek-Místek", description: "Mrazuvzdorná dlažba na venkovní terasu." },
+  { image: "/images/kamen/kamen-5.jpg", label: "Obložení fasády", description: "Kamenný obklad vstupu do domu." },
+  { image: "/images/robota/IMG_3917.jpg", label: "Rekonstrukce Havířov", description: "Kompletní přestavba bytového jádra." },
+  { image: "/images/kamen/kamen-19.jpg", label: "Travertinová dlažba", description: "Crazy pave vzor z přírodního travertinu." },
+  { image: "/images/robota/IMG_3920.jpg", label: "Koupelna Bohumín", description: "Prémiové materiály RAKO a Geberit." },
+  { image: "/images/robota/IMG_3922.jpg", label: "Obklady schodiště", description: "Keramické obklady interiérového schodiště." },
+  { image: "/images/kamen/kamen-13.jpg", label: "Venkovní barbecue", description: "Kamenný gril s dřevníkem na zahradu." },
+  { image: "/images/robota/IMG_3970.jpg", label: "Wellness Ostrava", description: "Obklady pro privátní wellness zónu." },
+  { image: "/images/kamen/kamen-20.jpg", label: "Crazy Pave travertin", description: "Nepravidelná kamenná dlažba v šedém tónu." },
+  { image: "/images/robota/IMG_3976.jpg", label: "Koupelna Orlová", description: "Harmonická kombinace barev a materiálů." },
+  { image: "/images/robota/IMG_3986.jpg", label: "Malá koupelna Opava", description: "Chytré řešení malého prostoru." },
+  { image: "/images/kamen/kamen-21.jpg", label: "Travertin detail", description: "Precizní spárování přírodního kamene." },
+  { image: "/images/robota/IMG_3993.jpg", label: "Koupelna s oknem", description: "Promyšlené osvětlení a prostorový design." },
+  { image: "/images/robota/IMG_3999.jpg", label: "Luxusní koupelna Ostrava", description: "Nadčasový design s prémiovými materiály." },
+  { image: "/images/robota/IMG_4135.jpg", label: "Podlaha Český Těšín", description: "Velkoformátová dlažba v obývacím pokoji." },
+  { image: "/images/robota/IMG_4170.jpg", label: "Koupelna Petřvald", description: "Relaxační koupelna s vanou i sprchou." },
+  { image: "/images/robota/IMG_4397.jpg", label: "Komerční prostor Ostrava", description: "Obklady pro restauraci v centru města." },
+  { image: "/images/robota/IMG_4411.jpg", label: "Bazén Frýdek-Místek", description: "Speciální protiskluzové obklady bazénu." },
+  { image: "/images/robota/IMG_4738.jpg", label: "Fasáda Kopřivnice", description: "Fasádní obklady rodinného domu." },
+  { image: "/images/robota/IMG_5061.jpg", label: "Koupelna Nový Jičín", description: "Rekonstrukce koupelny v paneláku." },
+  { image: "/images/robota/IMG_5062.jpg", label: "Moderní koupelna Ostrava", description: "Trendy design s walk-in sprchou." },
+  { image: "/images/robota/IMG_5364.jpg", label: "Koupelna Hlučín", description: "Nadstandardní provedení s hydroizolací." },
+  { image: "/images/robota/IMG_5564.jpg", label: "Obklady krbu Ostrava", description: "Přírodní kámen pro obložení krbu." },
+  { image: "/images/robota/IMG_5749.jpg", label: "Koupelna Havířov centrum", description: "Kompletní rekonstrukce bytového jádra." },
+  { image: "/images/robota/IMG_5925.jpg", label: "Koupelna Ostrava-Jih", description: "Moderní koupelna se sprchovým koutem." },
+  { image: "/images/robota/IMG_6078.jpg", label: "200+ realizací", description: "Spokojení zákazníci po celém kraji." },
 ];
 
 export function Gallery() {
@@ -181,14 +193,20 @@ export function Gallery() {
                   }}
                 >
                   {/* Image */}
-                  <motion.img
-                    src={item.image}
-                    alt={item.label}
-                    className="absolute inset-0 w-full h-full object-cover"
+                  <motion.div
+                    className="absolute inset-0"
                     animate={{ scale: isActive ? 1.05 : 1 }}
                     transition={{ duration: 0.5 }}
-                    draggable={false}
-                  />
+                  >
+                    <Image
+                      src={item.image}
+                      alt={`${item.label} - realizace koupelny Ostrava`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 250px, 400px"
+                      draggable={false}
+                    />
+                  </motion.div>
 
                   {/* Gradient Overlay */}
                   <div

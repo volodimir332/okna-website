@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layers, Droplets, Ruler, Scissors, ScanLine, Maximize, CheckCircle2, ChevronDown } from "lucide-react";
+import { Droplets, Ruler, ScanLine, Maximize, ChevronDown } from "lucide-react";
 import { Section, SectionHeader } from "@/components/layout/Section";
 
 export function TechnicalStandards() {
@@ -41,12 +41,12 @@ export function TechnicalStandards() {
             <SectionHeader
                 title="Technická preciznost"
                 subtitle="Kvalita, kterou nevidíte na první pohled, ale oceníte ji po letech."
-                className="[&>h2]:text-[#A5B4FC]"
+                className="[&>h2]:text-gray-900 [&>p]:text-sm [&>p]:sm:text-base"
             />
 
             <div className="grid md:grid-cols-12 gap-8 md:gap-16 items-stretch">
                 {/* Content Side */}
-                <div className="md:col-span-7 flex flex-col md:h-[500px] py-4 gap-12 md:gap-20">
+                <div className="md:col-span-6 flex flex-col md:h-[575px] py-4 gap-12 md:gap-20">
                     <h3 className="text-2xl md:text-4xl font-bold text-gray-900 mb-0 leading-tight">
                         Obklad je jen 20 % výsledku.<br />
                         <span className="text-gray-400">Zbytek je pod ním.</span>
@@ -104,7 +104,7 @@ export function TechnicalStandards() {
                 </div>
 
                 {/* Visual Side */}
-                <div className="md:col-span-5 relative h-[300px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
+                <div className="md:col-span-6 relative h-[300px] md:h-[575px] w-full rounded-3xl overflow-hidden shadow-2xl">
                     <Image
                         src="/tech-detail.jpg"
                         alt="Detail nivelačního systému a kvality obkladu"

@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, ShowerHead, Bath, Waves } from "lucide-react";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
@@ -12,30 +11,30 @@ const packages = [
     name: "MALÁ koupelna",
     nameColor: "#1F2937", // Black
     borderColor: "rgba(99, 102, 241, 0.3)", // Purple border
-    size: "1 300 x 1 600 mm",
-    area: "do 17 m²",
-    priceRange: "98 000 - 136 000",
-    priceNote: "Kč (včetně DPH)",
+    size: "do 4 m²",
+    area: "obklady cca 600–850 Kč/m²",
+    priceRange: "45 000 – 65 000",
+    priceNote: "Kč (bez DPH, bez materiálu)",
     features: [
       "3D vizualizace a kladečský plán v ceně",
       "příprava staveniště a zakrytí",
       "úprava rozvodů vody a odpadů",
       "úprava elektroinstalace",
-      "instalace obkladů a dlažeb",
-      "instalace sanity (vana/sprcha, umyvadlo)",
+      "pokládka standardních obkladů a dlažeb",
+      "instalace sanity (sprcha/vana, umyvadlo)",
       "výmalba",
       "hrubý úklid",
     ],
   },
   {
     id: "standardni",
-    name: "STANDARDNÍ koupelna",
+    name: "STŘEDNÍ koupelna",
     nameColor: "#1F2937", // Black
     borderColor: "rgba(99, 102, 241, 0.3)", // Purple border
-    size: "1 600 x 1 900 mm",
-    area: "do 21 m²",
-    priceRange: "136 000 - 212 000",
-    priceNote: "Kč (včetně DPH)",
+    size: "4 – 6 m²",
+    area: "obklady cca 600–850 Kč/m²",
+    priceRange: "65 000 – 95 000",
+    priceNote: "Kč (bez DPH, bez materiálu)",
     features: [
       "3D vizualizace a kladečský plán v ceně",
       "bourací práce a likvidace odpadu",
@@ -50,13 +49,13 @@ const packages = [
   },
   {
     id: "nadstandardni",
-    name: "NADSTANDARDNÍ koupelna",
+    name: "VELKÁ koupelna",
     nameColor: "#1F2937", // Black
     borderColor: "rgba(99, 102, 241, 0.3)", // Purple border
-    size: "1 900 x 3 000 mm",
-    area: "do 30 m²",
-    priceRange: "od 208 000",
-    priceNote: "Kč (včetně DPH)",
+    size: "6 – 10 m²",
+    area: "velkoformát cca 850–1 250 Kč/m²",
+    priceRange: "95 000 – 140 000",
+    priceNote: "Kč (bez DPH, bez materiálu)",
     features: [
       "3D vizualizace a kladečský plán v ceně",
       "kompletní bourací a stavební práce",
@@ -77,30 +76,12 @@ export function Packages() {
     document.querySelector("#kontakt")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Auto-rotate slides every 4 seconds unless paused
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % packages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  // Helper to handle cyclic index
-  const getPosition = (index: number) => {
-    let diff = (index - activeIndex) % packages.length;
-    if (diff < 0) diff += packages.length;
-    return diff;
-  };
-
   return (
     <Section id="balicky" theme="light" className="overflow-hidden">
       <SectionHeader
-        title="Ceny rekonstrukce koupelny"
-        subtitle="Transparentní ceny bez skrytých nákladů. Vyberte si podle velikosti vaší koupelny."
+        title="Orientační ceny práce"
+        subtitle="Přibližné ceny za práci bez materiálu. Vyberte si podle velikosti vaší koupelny."
+        className="[&>p]:text-sm [&>p]:sm:text-base"
       />
 
       {/* Desktop Grid (Hidden on Mobile) */}
@@ -138,15 +119,15 @@ export function Packages() {
                 </h3>
                 <div className="space-y-1.5 sm:space-y-3 mt-4 sm:mt-6">
                   <p className="text-gray-600">
-                    <span className="text-gray-500 text-xs sm:text-sm">rozměr: </span>
+                    <span className="text-gray-500 text-xs sm:text-sm">plocha: </span>
                     <span className="font-semibold text-gray-900 text-sm sm:text-lg">{pkg.size}</span>
                   </p>
                   <p className="text-gray-600">
-                    <span className="text-gray-500 text-xs sm:text-sm">obklad a dlažba: </span>
+                    <span className="text-gray-500 text-xs sm:text-sm">obklady/dlažba: </span>
                     <span className="font-semibold text-gray-900 text-sm sm:text-lg">{pkg.area}</span>
                   </p>
                   <p className="text-gray-600">
-                    <span className="text-gray-500 text-xs sm:text-sm">cena realizace: </span>
+                    <span className="text-gray-500 text-xs sm:text-sm">cena práce (cca): </span>
                     <span className="font-bold text-gray-900 text-base sm:text-xl">{pkg.priceRange} </span>
                     <span className="text-gray-500 text-xs sm:text-sm">{pkg.priceNote}</span>
                   </p>
@@ -213,12 +194,12 @@ export function Packages() {
                 </div>
                 <div className="space-y-1.5">
                   <p className="text-sm text-gray-600">
-                    <span className="text-gray-500">rozměr: </span>
+                    <span className="text-gray-500">plocha: </span>
                     <span className="font-semibold text-gray-900">{pkg.size}</span>
                   </p>
                   <p className="text-sm text-gray-600">
-                    <span className="text-gray-500">cena: </span>
-                    <span className="font-bold text-gray-900 text-base">{pkg.priceRange}</span>
+                    <span className="text-gray-500">cena práce (cca): </span>
+                    <span className="font-bold text-gray-900 text-base">{pkg.priceRange} Kč</span>
                   </p>
                 </div>
               </div>
@@ -246,6 +227,12 @@ export function Packages() {
           </motion.div>
         ))}
       </div>
+
+      {/* Pricing disclaimer */}
+      <p className="text-center text-xs sm:text-sm text-gray-400 mt-6 sm:mt-10 max-w-2xl mx-auto leading-relaxed">
+        Ceny jsou orientační, bez DPH a bez materiálu. Platné pro Ostravu a okolí do 50&nbsp;km.
+        Standardní dlažba obvykle od 550 Kč/m². Přesnou kalkulaci připravíme po bezplatném zaměření.
+      </p>
 
     </Section>
   );

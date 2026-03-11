@@ -1,199 +1,138 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ContentPage } from "@/components/content/ContentPage";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/content/Breadcrumbs";
+import { CTASection } from "@/components/content/CTASection";
+import { blogArticles } from "@/lib/blog-articles";
 
-// Blog articles data
-const articles = [
-  {
-    id: 1,
-    slug: "cena-rekonstrukce-koupelny-ostrava-2026",
-    title: "Cena rekonstrukce koupelny v Ostravě 2026",
-    excerpt: "Kompletní přehled cen pro malé, standardní i nadstandardní koupelny. Detailní rozpočet a co vše je zahrnuto v ceně.",
-    category: "Ceny",
-    readTime: "8 min",
-    date: "15. ledna 2026",
-  },
-  {
-    id: 2,
-    slug: "rekonstrukce-umakartoveho-jadra-postup",
-    title: "Rekonstrukce umakartového jádra: Průvodce",
-    excerpt: "Jaké jsou možnosti rekonstrukce starého umakartového jádra? Postup prací a proč je lepší jádro zbourat.",
-    category: "Technologie",
-    readTime: "12 min",
-    date: "10. ledna 2026",
-  },
-  {
-    id: 3,
-    slug: "trendy-koupelen-2026",
-    title: "Trendy v designu koupelen 2026",
-    excerpt: "Přírodní materiály, chytré technologie a koncept domácího spa. Co je teď IN.",
-    category: "Design",
-    readTime: "6 min",
-    date: "5. ledna 2026",
-  },
-  {
-    id: 4,
-    slug: "jak-dlouho-trva-rekonstrukce-koupelny",
-    title: "Jak dlouho trvá rekonstrukce koupelny?",
-    excerpt: "Podrobný časový harmonogram od bourání po finální úklid. Den po dni.",
-    category: "Praktické rady",
-    readTime: "5 min",
-    date: "1. ledna 2026",
-  },
-  {
-    id: 5,
-    slug: "rekonstrukce-koupelny-poruba",
-    title: "Rekonstrukce koupelen v Ostravě-Porubě",
-    excerpt: "Specializujeme se na panelové domy v Porubě. Znalost místních specifik.",
-    category: "Lokality",
-    readTime: "4 min",
-    date: "28. prosince 2025",
-  },
-  {
-    id: 6,
-    slug: "stavebni-povoleni-rekonstrukce-koupelny",
-    title: "Stavební povolení na rekonstrukci koupelny",
-    excerpt: "Kdy potřebujete povolení a kdy ne. Aktuální legislativa 2026.",
-    category: "Legislativa",
-    readTime: "7 min",
-    date: "20. prosince 2025",
-  },
-  {
-    id: 7,
-    slug: "vybrat-spravnou-dlazbu",
-    title: "Jak vybrat správnou dlažbu do koupelny",
-    excerpt: "Protiskluznost, formáty, materiály. Na co si dát pozor při výběru.",
-    category: "Materiály",
-    readTime: "6 min",
-    date: "15. prosince 2025",
-  },
-  {
-    id: 8,
-    slug: "sprchovy-kout-nebo-vana",
-    title: "Sprchový kout nebo vana?",
-    excerpt: "Výhody a nevýhody obou variant. Jak se rozhodnout.",
-    category: "Praktické rady",
-    readTime: "5 min",
-    date: "10. prosince 2025",
-  },
-];
+export const metadata: Metadata = {
+  title: "Blog | Obklady, dlažba a rekonstrukce | OBK Ostrava",
+  description:
+    "Články o rekonstrukci koupelen, cenách obkladů, trendech a praktických radách. Od mistra obkladače s 15+ lety praxe v Ostravě.",
+  alternates: { canonical: "https://obklady-ostrava.cz/blog" },
+};
+
+const breadcrumbs = [{ label: "Blog" }];
+
+// Map slugs to article images
+const articleImages: Record<string, string> = {
+  "rekonstrukce-koupelny-ostrava-jak-nespalit-200000": "/images/articles/rekonstrukce-koupelny-cena.jpg",
+  "hydroizolace-koupelny-proc-nesmi-plakat": "/images/articles/hydroizolace-koupelny.jpg",
+  "velkoformatova-dlazba-2025-trendy-ceny": "/images/articles/velkoformatova-dlazba.jpg",
+  "kamenny-obklad-krbu-srdce-domu": "/images/articles/kamenny-obklad-krbu.jpg",
+  "obklad-na-obklad-lze-pokladat-novou-dlazbu-na-starou": "/images/articles/obklad-na-obklad.jpg",
+  "3d-navrh-koupelny-zdarma-proc-je-dulezity-sparorez": "/images/articles/3d-navrh-koupelny.jpg",
+  "jak-vybrat-obkladace-v-ostrave-checklist-a-cervene-vlajky": "/images/articles/jak-vybrat-obkladace.jpg",
+};
+
+const articles = Object.values(blogArticles)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    breadcrumbJsonLd(breadcrumbs),
+    {
+      "@type": "CollectionPage",
+      name: "Blog — obklady, dlažba a rekonstrukce",
+      description:
+        "Články o rekonstrukci koupelen, cenách obkladů a praktických radách.",
+      publisher: {
+        "@type": "Organization",
+        name: "OBK Obkladač Ostrava",
+      },
+    },
+  ],
+};
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#FAFAFA]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-medium">Zpět na hlavní stránku</span>
-          </Link>
+    <ContentPage jsonLd={jsonLd}>
+      <div className="container-custom py-8 sm:py-12">
+        <Breadcrumbs items={breadcrumbs} />
 
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">Koupelna</span>
-            <span className="text-xl font-light text-gray-400">Ostrava</span>
-          </Link>
-        </div>
-      </header>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--text-primary)] mb-2">
+          Blog
+        </h1>
 
-      {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        {/* Page Title */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Blog
-          </h1>
-          <p className="text-lg text-gray-500 max-w-xl">
-            Užitečné články o rekonstrukci koupelen, cenách, trendech a praktických radách.
-          </p>
-        </motion.div>
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mb-8 leading-relaxed">
+          Užitečné články o rekonstrukci koupelen, cenách, trendech
+          a praktických radách.
+        </p>
 
-        {/* Articles Grid */}
-        <div className="space-y-6">
-          {articles.map((article, index) => (
-            <motion.article
-              key={article.id}
-              className="group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
+        {/* Article cards — 2 columns */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/blog/${article.slug}`}
+              className="group block bg-white border border-[var(--border)] rounded-2xl overflow-hidden hover:border-[#C7D2FE] hover:shadow-lg transition-all"
             >
-              <Link
-                href={`/blog/${article.slug}`}
-                className="block p-6 bg-white rounded-xl border border-gray-100 hover:border-[#C7D2FE]/50 hover:shadow-sm transition-all"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  {/* Left side */}
-                  <div className="flex-1">
-                    {/* Category */}
-                    <span className="inline-block text-xs font-medium text-[#6B7AE8] mb-2">
-                      {article.category}
-                    </span>
-
-                    {/* Title */}
-                    <h2 className="text-lg md:text-xl font-semibold text-gray-900 group-hover:text-[#6B7AE8] transition-colors mb-2">
-                      {article.title}
-                    </h2>
-
-                    {/* Excerpt */}
-                    <p className="text-gray-500 text-sm line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                  </div>
-
-                  {/* Right side - Meta */}
-                  <div className="flex items-center gap-6 text-xs text-gray-400 md:flex-shrink-0">
-                    <span className="flex items-center gap-1.5">
+              <div className="relative h-44 sm:h-48 overflow-hidden">
+                <Image
+                  src={articleImages[article.slug] || "/images/articles/rekonstrukce-koupelny-cena.jpg"}
+                  alt={article.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
+                <div className="absolute top-3 left-3">
+                  <span className="inline-block px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#6B7AE8]">
+                    {article.category}
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5">
+                <h2 className="text-base sm:text-lg font-bold text-[var(--text-primary)] group-hover:text-[#6B7AE8] transition-colors mb-2 leading-snug">
+                  {article.title}
+                </h2>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-3 line-clamp-2">
+                  {article.metaDescription}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 text-xs text-[var(--text-tertiary)]">
+                    <span className="flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" />
                       {article.date}
                     </span>
-                    <span className="flex items-center gap-1.5">
+                    <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
                       {article.readTime}
                     </span>
-                    <ArrowRight className="w-4 h-4 text-[#6B7AE8] opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
+                  <ArrowRight className="w-4 h-4 text-[var(--text-tertiary)] group-hover:text-[#6B7AE8] transition-colors" />
                 </div>
-              </Link>
-            </motion.article>
+              </div>
+            </Link>
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <p className="text-gray-500 mb-4">
-            Máte konkrétní dotaz ohledně rekonstrukce?
-          </p>
+        {/* Link to rady */}
+        <div className="mb-12 p-5 sm:p-6 bg-white border border-[var(--border)] rounded-2xl flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-bold text-[var(--text-primary)] mb-1">
+              Rady a tipy
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)]">
+              Praktické články o cenách, materiálech a postupu rekonstrukce.
+            </p>
+          </div>
           <Link
-            href="/#kontakt"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#C7D2FE] text-gray-900 font-medium rounded-full hover:bg-[#B4C6FC] transition-colors"
+            href="/rady"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#6B7AE8] hover:text-[#5A68D6] transition-colors flex-shrink-0 ml-4"
           >
-            Kontaktujte nás
+            Rady
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </motion.div>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-100 py-8">
-        <div className="max-w-5xl mx-auto px-6 text-center text-sm text-gray-400">
-          © 2026 Koupelna Ostrava. Všechna práva vyhrazena.
         </div>
-      </footer>
-    </div>
+
+        <CTASection
+          title="Máte konkrétní dotaz ohledně rekonstrukce?"
+          description="Zavolejte nebo napište. Poradíme vám s výběrem materiálu, rozpočtem i harmonogramem."
+        />
+      </div>
+    </ContentPage>
   );
 }

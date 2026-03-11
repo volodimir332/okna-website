@@ -2,43 +2,44 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 const steps = [
   {
     number: "01",
     title: "Nezávazná schůzka",
-    description: "Domluvíme si schůzku přímo u vás. Přijedeme, zaměříme prostory a probereme vaše představy v pohodlí vašeho domova.",
+    description: "Domluvíme si schůzku přímo u vás. Přijedeme, zaměříme prostory a probereme vaše představy — ať už jde o koupelnu, obklady, dlažbu nebo kámen.",
     image: "/images/bathroom/IMG_6509.JPG",
   },
   {
     number: "02",
     title: "Inspirace a představy",
-    description: "Ukažte nám fotky, inspiraci z internetu a plánek současné koupelny. Vymyslíme design přesně pro vás.",
-    image: "/images/bathroom/IMG_6510.JPG",
+    description: "Ukažte nám fotky nebo inspiraci z internetu. Ať plánujete kamenný obklad, novou dlažbu nebo kompletní rekonstrukci — vymyslíme řešení přesně pro vás.",
+    image: "/images/kamen/kamen-1.jpg",
   },
   {
     number: "03",
     title: "3D vizualizace",
-    description: "Do druhého dne od zaměření pro vás připravíme profesionální 3D návrh vaší nové koupelny a zašleme vám ho online.",
+    description: "Do druhého dne od zaměření připravíme profesionální 3D návrh vašeho projektu a zašleme vám ho online ke schválení.",
     image: "/images/bathroom/IMG_6511.JPG",
   },
   {
     number: "04",
     title: "Cenová nabídka",
-    description: "Jakmile odsouhlasíte návrh, připravíme pro vás cenovou nabídku kompletního vybavení od podlahové dlažby po zrcadlo.",
-    image: "/images/bathroom/IMG_6512.JPG",
+    description: "Jakmile odsouhlasíte návrh, připravíme pro vás kompletní cenovou nabídku — od materiálu po realizaci, bez skrytých nákladů.",
+    image: "/images/kamen/kamen-10.jpg",
   },
   {
     number: "05",
     title: "Materiál až ke dveřím",
-    description: "Veškerý materiál pro vaši vysněnou koupelnu vám doručíme přesně na čas, kdy jej budete potřebovat.",
-    image: "/images/bathroom/IMG_6513.JPG",
+    description: "Veškerý materiál — obklady, dlažbu, přírodní kámen i doplňky — vám doručíme přesně na čas, kdy jej budete potřebovat.",
+    image: "/images/kamen/kamen-3.jpg",
   },
   {
     number: "06",
     title: "Realizace na klíč",
-    description: "Náš tým profesionálů provede kompletní rekonstrukci. Pevná cena, jasný termín, záruka 60 měsíců.",
-    image: "/images/bathroom/IMG_6518.JPG",
+    description: "Náš tým profesionálů provede kompletní realizaci od obkladů po kamenné prvky. Pevná cena, jasný termín, záruka 60 měsíců.",
+    image: "/images/kamen/kamen-7.jpg",
   },
 ];
 
@@ -46,26 +47,43 @@ export function ProcessSteps() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "center center"]
+    offset: ["start end", "end start"]
   });
 
-  // Animate width from 95% to 100% as user scrolls
-  const width = useTransform(scrollYProgress, [0, 1], ["95%", "100%"]);
-  const borderRadius = useTransform(scrollYProgress, [0, 1], ["24px", "16px"]);
+  // Animate width from 90% to 100% as block enters
+  const width = useTransform(scrollYProgress, [0, 0.35], ["90%", "100%"]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.35], ["32px", "16px"]);
+  // Fade in later (need to scroll more), fade out earlier (starts fading sooner)
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.65, 0.8], [0, 0, 1, 1, 0]);
+  // Scale up from smaller
+  const scale = useTransform(scrollYProgress, [0, 0.25, 0.65, 0.8], [0.95, 1, 1, 0.97]);
+  // Y offset for parallax feel
+  const y = useTransform(scrollYProgress, [0, 0.25], [60, 0]);
+  // Asymmetric mask — top fades more, bottom fades less when entering/leaving
+  const maskTop = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.65, 0.8], [40, 20, 0, 0, 30]);
+  const maskBottom = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.65, 0.8], [20, 10, 0, 0, 15]);
+  const maskImage = useTransform(
+    [maskTop, maskBottom],
+    ([top, bottom]: number[]) =>
+      top === 0 && bottom === 0
+        ? 'none'
+        : `linear-gradient(to bottom, transparent 0%, black ${top}%, black ${100 - bottom}%, transparent 100%)`
+  );
 
   return (
-    <section ref={containerRef} className="relative py-4 sm:py-8 md:py-12">
+    <section ref={containerRef} className="relative pt-16 sm:pt-24 md:pt-32 pb-4 sm:pb-8 md:pb-12">
       <div className="flex justify-center">
         <motion.div
           className="relative bg-[#1E1E1E] overflow-hidden"
           style={{
             width,
             borderRadius,
+            opacity,
+            scale,
+            y,
+            WebkitMaskImage: maskImage,
+            maskImage,
           }}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
           {/* Header */}
           <div className="px-4 pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12 lg:pt-20 lg:pb-16">
@@ -75,7 +93,7 @@ export function ProcessSteps() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              Vaše cesta ke koupelně<br className="sm:hidden" /><span className="whitespace-nowrap"> na míru</span>
+              Jak probíhá<br className="sm:hidden" /><span className="whitespace-nowrap"> spolupráce</span>
             </motion.h2>
           </div>
 
@@ -96,12 +114,13 @@ export function ProcessSteps() {
                   transition={{ delay: index * 0.1 }}
                 >
                   {/* Image Container: Absolute full height on mobile, Aspect ratio on desktop */}
-                  {/* Image Container: Absolute full height on mobile, Aspect ratio on desktop */}
                   <div className="absolute inset-0 sm:relative sm:aspect-[4/3] overflow-hidden">
-                    <img
+                    <Image
                       src={step.image}
-                      alt={step.title}
-                      className="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-500"
+                      alt={`${step.title} - obklady, dlažby a kámen krok ${step.number}`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-all duration-500"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
                     />
 
                     {/* Dark Overlay */}
@@ -121,12 +140,9 @@ export function ProcessSteps() {
 
                   {/* Content: Absolute bottom on mobile, Static flow on desktop */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 sm:static sm:p-4 md:p-5 z-20">
-                    <h3 className="text-lg sm:text-base md:text-lg font-bold text-[#C7D2FE] mb-2 sm:mb-2 leading-tight">
+                    <h3 className="text-lg sm:text-base md:text-lg font-bold text-[#C7D2FE] leading-tight">
                       {step.title}
                     </h3>
-                    <p className="text-sm sm:text-xs md:text-sm text-gray-300 sm:text-gray-400 leading-relaxed sm:leading-relaxed line-clamp-4 sm:line-clamp-none">
-                      {step.description}
-                    </p>
                   </div>
                 </motion.div>
               );

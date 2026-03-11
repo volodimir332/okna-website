@@ -1,5 +1,3 @@
-"use client";
-
 import { Header, Footer } from "@/components/layout";
 import {
   Hero,
@@ -10,21 +8,18 @@ import {
   Quiz,
   FAQ,
   Contact,
-  TechnicalStandards,
+  Specializace,
 } from "@/components/sections";
-import { PromoPopup, BackgroundPattern, CookieConsent } from "@/components/ui";
+import { PromoPopup, CookieConsent, WhatsAppButton } from "@/components/ui";
 
 export default function Home() {
   return (
     <div className="relative bg-[#FAFAFA]">
-      {/* Global background with grid - only at top */}
-      <BackgroundPattern />
-
       <Header />
       <main className="relative z-10">
         <Hero />
         <ProcessSteps />
-        <TechnicalStandards />
+        <Specializace />
         <Packages />
         <Gallery />
         <Quiz />
@@ -35,6 +30,7 @@ export default function Home() {
       <Footer />
       <PromoPopup />
       <CookieConsent />
+      <WhatsAppButton />
     </div>
   );
 }

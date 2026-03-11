@@ -1,14 +1,12 @@
 export { Hero } from "./Hero";
-export { AIDemo } from "./AIDemo";
-export { HowItWorks } from "./HowItWorks";
 export { Quiz } from "./Quiz";
 export { ProcessSteps } from "./ProcessSteps";
 export { Packages } from "./Packages";
 export { Measurement } from "./Measurement";
 export { Gallery } from "./Gallery";
-export { WhyUs } from "./WhyUs";
-export { Locations } from "./Locations";
 export { FAQ } from "./FAQ";
 export { Contact } from "./Contact";
-export { Blog } from "./Blog";
 export { TechnicalStandards } from "./TechnicalStandards";
+export { ArticlesPreview } from "./ArticlesPreview";
+export { Specializace } from "./Specializace";
+export { SvetKamene } from "./SvetKamene";
