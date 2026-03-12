@@ -100,15 +100,15 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
       />
 
-      {/* Fade on left side */}
+      {/* Fade on left side — bottom half only */}
       <div
-        className="absolute top-0 left-0 bottom-0 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
+        className="absolute bottom-0 left-0 h-1/2 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
         style={{ background: 'linear-gradient(to right, #FAFAFA 0%, transparent 100%)' }}
       />
 
-      {/* Fade on right side */}
+      {/* Fade on right side — bottom half only */}
       <div
-        className="absolute top-0 right-0 bottom-0 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
+        className="absolute bottom-0 right-0 h-1/2 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
         style={{ background: 'linear-gradient(to left, #FAFAFA 0%, transparent 100%)' }}
       />
 
