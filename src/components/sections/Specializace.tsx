@@ -10,7 +10,7 @@ const row1 = [
   { title: "Velkoformátové obklady", subtitle: "Obklady 60×120 cm a větší", image: "/images/robota/IMG_2512.jpg", href: "/sluzby/velkoformatove-obklady" },
   { title: "Kamenný krb", subtitle: "Obložení krbů žulou a mramorem", image: "/images/kamen/kamen-9.jpg", href: "/svet-kamene" },
   { title: "Obklady schodišť", subtitle: "Interiérové i exteriérové schody", image: "/images/robota/IMG_2526.jpg", href: "/sluzby" },
-  { title: "Kamenná kuchyně", subtitle: "Kuchyňské ostrovy z přírodního kamene", image: "/images/kamen/kamen-1.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb", subtitle: "Obložení krbu přírodním kamenem", image: "/images/kamen/kamen-25.jpg", href: "/svet-kamene" },
   { title: "Sprchové kouty", subtitle: "Walk-in sprchy a bezbariérová řešení", image: "/images/robota/IMG_3892.jpg", href: "/sluzby/obklady-koupelen" },
   { title: "Kamenné zdi", subtitle: "Dekorativní stěny z přírodního kamene", image: "/images/kamen/kamen-3.jpg", href: "/svet-kamene" },
   { title: "Dekorativní obklady", subtitle: "Mozaiky, vzory a kombinace materiálů", image: "/images/robota/IMG_6078.jpg", href: "/sluzby/obklady-kuchyni" },
