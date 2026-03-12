@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,18 +39,52 @@ const row2 = [
 
 function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof row1; direction?: "left" | "right"; speed?: number }) {
   const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<{ x: number; scrollLeft: number } | null>(null);
   const doubled = [...items, ...items];
-  const totalWidth = items.length * 395; // 390px card + 5px gap
+  // Desktop: 390px card + 4px gap
+  const totalWidth = items.length * 394;
 
   const animationName = direction === "left" ? "marqueeLeft" : "marqueeRight";
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    if (scrollRef.current) {
+      const transform = getComputedStyle(scrollRef.current).transform;
+      const matrix = new DOMMatrix(transform);
+      touchStartRef.current = {
+        x: e.touches[0].clientX,
+        scrollLeft: matrix.m41,
+      };
+      scrollRef.current.style.animationPlayState = "paused";
+      scrollRef.current.style.transform = `translateX(${matrix.m41}px)`;
+      scrollRef.current.style.animation = "none";
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartRef.current || !scrollRef.current) return;
+    const diff = e.touches[0].clientX - touchStartRef.current.x;
+    scrollRef.current.style.transform = `translateX(${touchStartRef.current.scrollLeft + diff}px)`;
+  };
+
+  const handleTouchEnd = () => {
+    if (scrollRef.current) {
+      scrollRef.current.style.animation = "";
+      scrollRef.current.style.animationPlayState = "running";
+    }
+    touchStartRef.current = null;
+    setTimeout(() => setIsPaused(false), 2000);
+  };
 
   return (
     <div
       className="overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <style jsx>{`
         @keyframes marqueeLeft {
@@ -63,6 +97,7 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
         }
       `}</style>
       <div
+        ref={scrollRef}
         className="flex gap-1"
         style={{
           animation: `${animationName} ${speed}s linear infinite`,
@@ -73,14 +108,14 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
           <Link
             key={`${spec.title}-${i}`}
             href={spec.href}
-            className="group relative flex-shrink-0 w-[312px] sm:w-[390px] overflow-hidden rounded-sm aspect-[3/4]"
+            className="group relative flex-shrink-0 w-[265px] sm:w-[390px] overflow-hidden rounded-lg aspect-[3/4]"
           >
             <Image
               src={spec.image}
               alt={spec.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 640px) 312px, 390px"
+              sizes="(max-width: 640px) 265px, 390px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
@@ -111,8 +146,8 @@ export function Specializace() {
         </p>
       </div>
 
-      {/* Full-width marquee rows */}
-      <div className="space-y-2">
+      {/* Full-width marquee rows — gap-1 between rows same as between cards */}
+      <div className="space-y-1">
         <MarqueeRow items={row1} direction="left" speed={90} />
         <MarqueeRow items={row2} direction="right" speed={100} />
       </div>
