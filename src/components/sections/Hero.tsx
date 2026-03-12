@@ -41,7 +41,7 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
             const parts = line.split('kámen');
             return (
               <span key={i}>
-                <span className="text-[#6B6B6B]">{parts[0]}</span>
+                <span className="text-[#3D3D3D]">{parts[0]}</span>
                 {line.includes('kámen') && <span className="text-white">kámen{parts[1]}</span>}
               </span>
             );
