@@ -52,7 +52,7 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
     <span className="relative">
       {renderText()}
       <motion.span
-        className="inline-block w-[3px] h-[0.9em] bg-black ml-1 align-middle"
+        className="inline-block w-[3px] h-[0.9em] bg-[#1A1A1A] ml-1 align-middle"
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
       />
@@ -116,7 +116,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-black" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
+          <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-[#1A1A1A]" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
             <span className="sr-only">Precizní obklady a přírodní kámen.</span>
 
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
@@ -128,9 +128,9 @@ export function Hero() {
 
           <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-10 sm:mt-14 md:mt-20">
             <Button
-              variant="violet"
+              variant="secondary"
               size="md"
-              className="text-lg sm:text-xl px-7 sm:px-10 py-3.5 sm:py-5"
+              className="text-lg sm:text-xl px-7 sm:px-10 py-3.5 sm:py-5 !bg-white !text-[#1A1A1A] !border-white/80 hover:!bg-white/90 shadow-lg"
               onClick={() => scrollToSection("#kviz")}
             >
               Spočítat cenu
