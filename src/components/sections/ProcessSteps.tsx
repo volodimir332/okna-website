@@ -15,7 +15,7 @@ const steps = [
     number: "02",
     title: "Inspirace a představy",
     description: "Ukažte nám fotky nebo inspiraci z internetu. Ať plánujete kamenný obklad, novou dlažbu nebo kompletní rekonstrukci — vymyslíme řešení přesně pro vás.",
-    image: "/images/kamen/kamen-1.jpg",
+    image: "/images/robota/IMG_3892.jpg",
   },
   {
     number: "03",
@@ -140,7 +140,7 @@ export function ProcessSteps() {
 
                   {/* Content: Absolute bottom on mobile, Static flow on desktop */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 sm:static sm:p-4 md:p-5 z-20">
-                    <h3 className="text-lg sm:text-base md:text-lg font-bold text-[#C7D2FE] leading-tight">
+                    <h3 className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#C7D2FE] leading-tight">
                       {step.title}
                     </h3>
                   </div>
