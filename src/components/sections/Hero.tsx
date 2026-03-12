@@ -33,10 +33,17 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
 
   const renderText = () => {
     const lines = displayText.split('\n');
-    const totalLines = fullHeadline.split('\n').length;
     return (
       <>
         {lines.map((line, i) => {
+          if (i === 1) {
+            // Second line: "a přírodní kámen." — gradient from gray to white
+            return (
+              <span key={i} className="bg-gradient-to-r from-[#1A1A1A] via-white/80 to-white bg-clip-text" style={{ WebkitTextFillColor: 'transparent' }}>
+                {line}
+              </span>
+            );
+          }
           return (
             <span key={i}>
               {line}
@@ -91,24 +98,7 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
       />
 
-      {/* Worker image — hidden on mobile, visible on desktop */}
-      <motion.div
-        className="absolute hidden sm:block sm:right-2 lg:right-4 xl:right-16 2xl:right-24 sm:bottom-0 z-20 pointer-events-none"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 1.5 }}
-      >
-        <Image
-          src="/images/hero/worker-obk.png"
-          alt="OBK pracovník"
-          width={440}
-          height={800}
-          className="object-contain drop-shadow-2xl sm:w-[260px] md:w-[300px] lg:w-[440px] h-auto"
-          priority
-        />
-      </motion.div>
-
-      {/* Content — vertically centered, above worker on mobile */}
+      {/* Content — vertically centered */}
       <div className="relative z-10 container-custom px-4 sm:px-6 min-h-screen flex items-center justify-center">
         <motion.div
           className="text-center flex flex-col items-center max-w-4xl"
