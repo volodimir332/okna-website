@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 // Full headline for typewriter
-const fullHeadline = "Obklady, dlažby\na kámen v Ostravě.\nNa klíč.";
+const fullHeadline = "Precizní obklady\na přírodní kámen.";
 
 function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
   const [displayText, setDisplayText] = useState("");
@@ -118,14 +118,13 @@ export function Hero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="mb-3 sm:mb-4 font-bold leading-[1.1] text-white drop-shadow-lg" style={{ fontSize: 'clamp(2.4rem, 5vw, 5.5rem)' }}>
-            <span className="sr-only">Obklady, dlažby a kámen v Ostravě. Na klíč.</span>
+            <span className="sr-only">Precizní obklady a přírodní kámen.</span>
 
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-lg px-2 sm:px-0 drop-shadow-md">
-            Výsledek uvidíte dřív, než začneme. Pevná cena. Jasný termín.
-            Vlastní realizační tým bez subdodavatelů.
+            Pevná cena. Jasný termín. Moravskoslezský kraj.
           </p>
 
           <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-6 sm:mt-12 md:mt-16">
