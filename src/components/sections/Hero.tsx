@@ -96,7 +96,7 @@ export function Hero() {
 
       {/* Fade to white at bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 z-[1] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-40 sm:h-52 z-[1] pointer-events-none"
         style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
       />
 
@@ -110,6 +110,18 @@ export function Hero() {
       <div
         className="absolute top-0 right-0 bottom-0 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
         style={{ background: 'linear-gradient(to left, #FAFAFA 0%, transparent 100%)' }}
+      />
+
+      {/* Bottom-left corner fade */}
+      <div
+        className="absolute bottom-0 left-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 z-[2] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom left, #FAFAFA 0%, transparent 70%)' }}
+      />
+
+      {/* Bottom-right corner fade */}
+      <div
+        className="absolute bottom-0 right-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 z-[2] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom right, #FAFAFA 0%, transparent 70%)' }}
       />
 
       {/* Content — vertically centered */}
