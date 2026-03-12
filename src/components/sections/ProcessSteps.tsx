@@ -51,17 +51,17 @@ export function ProcessSteps() {
   });
 
   // Animate width from 90% to 100% as block enters
-  const width = useTransform(scrollYProgress, [0, 0.35], ["90%", "100%"]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.35], ["32px", "16px"]);
-  // Fade in later (need to scroll more), fade out earlier (starts fading sooner)
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.65, 0.8], [0, 0, 1, 1, 0]);
+  const width = useTransform(scrollYProgress, [0.15, 0.45], ["90%", "100%"]);
+  const borderRadius = useTransform(scrollYProgress, [0.15, 0.45], ["32px", "16px"]);
+  // Fade in later — starts at 0.25, fully visible at 0.4
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.4, 0.65, 0.8], [0, 0, 1, 1, 0]);
   // Scale up from smaller
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.65, 0.8], [0.95, 1, 1, 0.97]);
+  const scale = useTransform(scrollYProgress, [0.15, 0.4, 0.65, 0.8], [0.95, 1, 1, 0.97]);
   // Y offset for parallax feel
-  const y = useTransform(scrollYProgress, [0, 0.25], [60, 0]);
+  const y = useTransform(scrollYProgress, [0.15, 0.4], [60, 0]);
   // Asymmetric mask — top fades more, bottom fades less when entering/leaving
-  const maskTop = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.65, 0.8], [40, 20, 0, 0, 30]);
-  const maskBottom = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.65, 0.8], [20, 10, 0, 0, 15]);
+  const maskTop = useTransform(scrollYProgress, [0.15, 0.3, 0.4, 0.65, 0.8], [40, 20, 0, 0, 30]);
+  const maskBottom = useTransform(scrollYProgress, [0.15, 0.3, 0.4, 0.65, 0.8], [20, 10, 0, 0, 15]);
   const maskImage = useTransform(
     [maskTop, maskBottom],
     ([top, bottom]: number[]) =>
