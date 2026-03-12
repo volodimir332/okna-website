@@ -55,7 +55,7 @@ export function ProcessSteps() {
       >
         {/* Header */}
         <motion.h2
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10 sm:mb-14 md:mb-16 tracking-tight"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-12 sm:mb-16 md:mb-20 tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -77,8 +77,8 @@ export function ProcessSteps() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                {/* Number above card */}
-                <span className="text-3xl sm:text-4xl font-bold text-gray-300 mb-2 ml-1">
+                {/* Number above card — sits right on top */}
+                <span className="text-3xl sm:text-4xl font-bold text-gray-300 -mb-3 ml-3 relative z-10">
                   {step.number}
                 </span>
 
