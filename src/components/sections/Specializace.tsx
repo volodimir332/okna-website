@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,34 +39,93 @@ const row2 = [
 
 function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof row1; direction?: "left" | "right"; speed?: number }) {
   const [isPaused, setIsPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const velocityRef = useRef(0);
+  const touchRef = useRef<{ x: number; time: number; offset: number } | null>(null);
+  const rafRef = useRef<number>(0);
+  const isTouchingRef = useRef(false);
   const doubled = [...items, ...items];
-  // Desktop: 390px card + 4px gap
   const totalWidth = items.length * 394;
+  const dir = direction === "left" ? -1 : 1;
+  const baseSpeed = (totalWidth / speed) * dir; // px per second
 
-  const animationName = direction === "left" ? "marqueeLeft" : "marqueeRight";
+  const animate = useCallback(() => {
+    if (!trackRef.current) return;
+
+    if (!isTouchingRef.current) {
+      // Add velocity decay (momentum from swipe)
+      if (Math.abs(velocityRef.current) > 0.5) {
+        offsetRef.current += velocityRef.current;
+        velocityRef.current *= 0.95; // friction
+      } else {
+        velocityRef.current = 0;
+        // Normal auto-scroll
+        offsetRef.current += baseSpeed / 60;
+      }
+
+      // Loop wrap
+      if (dir === -1 && offsetRef.current <= -totalWidth) {
+        offsetRef.current += totalWidth;
+      } else if (dir === 1 && offsetRef.current >= 0) {
+        offsetRef.current -= totalWidth;
+      }
+    }
+
+    trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
+    rafRef.current = requestAnimationFrame(animate);
+  }, [baseSpeed, totalWidth, dir]);
+
+  useEffect(() => {
+    // Start from correct position for right-moving rows
+    if (direction === "right") {
+      offsetRef.current = -totalWidth;
+    }
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [animate, direction, totalWidth]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isTouchingRef.current = true;
+    velocityRef.current = 0;
+    touchRef.current = {
+      x: e.touches[0].clientX,
+      time: Date.now(),
+      offset: offsetRef.current,
+    };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchRef.current) return;
+    const diff = e.touches[0].clientX - touchRef.current.x;
+    offsetRef.current = touchRef.current.offset + diff;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchRef.current) return;
+    const dt = (Date.now() - touchRef.current.time) / 1000;
+    const dx = e.changedTouches[0].clientX - touchRef.current.x;
+    if (dt > 0) {
+      velocityRef.current = (dx / dt) / 60; // px per frame momentum
+      // Cap velocity
+      velocityRef.current = Math.max(-30, Math.min(30, velocityRef.current));
+    }
+    touchRef.current = null;
+    isTouchingRef.current = false;
+  };
 
   return (
     <div
       className="overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      <style jsx>{`
-        @keyframes marqueeLeft {
-          from { transform: translateX(0); }
-          to { transform: translateX(-${totalWidth}px); }
-        }
-        @keyframes marqueeRight {
-          from { transform: translateX(-${totalWidth}px); }
-          to { transform: translateX(0); }
-        }
-      `}</style>
       <div
-        className="flex gap-1"
-        style={{
-          animation: `${animationName} ${speed}s linear infinite`,
-          animationPlayState: isPaused ? "paused" : "running",
-        }}
+        ref={trackRef}
+        className="flex gap-1 will-change-transform"
       >
         {doubled.map((spec, i) => (
           <Link
