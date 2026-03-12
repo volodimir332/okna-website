@@ -117,7 +117,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-3 sm:mb-4 font-bold leading-[1.1] text-white drop-shadow-lg" style={{ fontSize: 'clamp(2.4rem, 5vw, 5.5rem)' }}>
+          <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-white drop-shadow-lg" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
             <span className="sr-only">Precizní obklady a přírodní kámen.</span>
 
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
@@ -127,7 +127,7 @@ export function Hero() {
             Pevná cena. Jasný termín. Moravskoslezský kraj.
           </p>
 
-          <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-6 sm:mt-12 md:mt-16">
+          <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-10 sm:mt-14 md:mt-20">
             <Button
               variant="violet"
               size="md"
@@ -140,10 +140,10 @@ export function Hero() {
             <Button
               variant="secondary"
               size="md"
-              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5"
+              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-[#6B7AE8] !border-[#6B7AE8]/40 hover:!bg-[#6B7AE8]/10"
               onClick={() => scrollToSection("#galerie")}
             >
-              <Play className="w-5 h-5 sm:w-6 sm:h-6" />
+              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-[#6B7AE8] text-[#6B7AE8]" />
               <span className="hidden sm:inline">Zobrazit realizace</span>
               <span className="sm:hidden">Realizace</span>
             </Button>
