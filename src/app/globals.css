@@ -115,9 +115,7 @@ h2 {
   letter-spacing: -0.01em;
 }
 
-h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
-}
+/* h3 font-size managed by Tailwind classes per component */
 
 h4 {
   font-size: clamp(1rem, 2vw, 1.125rem);
