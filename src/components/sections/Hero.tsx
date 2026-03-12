@@ -74,7 +74,7 @@ export function Hero() {
 
       {/* Background image — under the header */}
       <Image
-        src="/images/hero/hero-bg.png?v=2"
+        src="/images/hero/hero-bg-v2.png"
         alt="Moderní koupelna s obklady a přírodním kamenem - realizace Ostrava"
         fill
         className="object-cover object-top"
