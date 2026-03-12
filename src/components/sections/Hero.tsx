@@ -36,11 +36,13 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
     return (
       <>
         {lines.map((line, i) => {
-          if (i === 1) {
-            // Second line: "a přírodní kámen." — gradient from gray to white
+          if (i === 1 && line.length > 0) {
+            // Second line: "a přírodní" in medium gray, "kámen." in white
+            const parts = line.split('kámen');
             return (
-              <span key={i} className="bg-gradient-to-r from-[#1A1A1A] via-white/80 to-white bg-clip-text" style={{ WebkitTextFillColor: 'transparent' }}>
-                {line}
+              <span key={i}>
+                <span className="text-[#6B6B6B]">{parts[0]}</span>
+                {line.includes('kámen') && <span className="text-white">kámen{parts[1]}</span>}
               </span>
             );
           }
