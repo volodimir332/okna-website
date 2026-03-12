@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://obklady-ostrava.cz"),
   title: {
-    default: "Rekonstrukce koupelny Ostrava na klíč | Záruka 60 měsíců | OBK",
+    default: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
     template: "%s | Obklady Ostrava"
   },
   description:
-    "Specialisté na kompletní rekonstrukce koupelen a bytových jader v Ostravě a okolí. Vlastní realizační tým bez subdodavatelů, pevná cena, hotovo v termínu. Záruka 60 měsíců. Bezplatná konzultace a 3D návrh.",
+    "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. 3D návrh zdarma. Pevná cena. Záruka 60 měsíců.",
   keywords: [
     "rekonstrukce koupelny ostrava",
     "rekonstrukce koupelny cena",
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
     url: "https://obklady-ostrava.cz",
     siteName: "OBK - Obklady Ostrava",
-    title: "Rekonstrukce koupelny Ostrava na klíč | OBK",
+    title: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
     description:
-      "Specialisté na rekonstrukce koupelen v Ostravě a okolí. Vlastní tým bez subdodavatelů, pevná cena, hotovo v termínu. Záruka 60 měsíců.",
+      "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. 3D návrh zdarma. Pevná cena. Záruka 60 měsíců.",
     images: [
       {
         url: "/opengraph-image",
@@ -85,8 +85,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rekonstrukce koupelny Ostrava | Na klíč",
-    description: "Specialisté na rekonstrukce koupelen v Ostravě a okolí. Záruka 60 měsíců.",
+    title: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
+    description: "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. Záruka 60 měsíců.",
     images: ["/opengraph-image"],
   },
   robots: {
