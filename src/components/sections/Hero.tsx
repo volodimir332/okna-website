@@ -100,16 +100,24 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, #FAFAFA 0%, transparent 100%)' }}
       />
 
-      {/* Fade on left side — bottom half only */}
+      {/* Fade on left side — fades in smoothly from top to bottom */}
       <div
-        className="absolute bottom-0 left-0 h-1/2 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
-        style={{ background: 'linear-gradient(to right, #FAFAFA 0%, transparent 100%)' }}
+        className="absolute inset-y-0 left-0 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to right, #FAFAFA 0%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 30%, black 70%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 30%, black 70%)',
+        }}
       />
 
-      {/* Fade on right side — bottom half only */}
+      {/* Fade on right side — fades in smoothly from top to bottom */}
       <div
-        className="absolute bottom-0 right-0 h-1/2 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
-        style={{ background: 'linear-gradient(to left, #FAFAFA 0%, transparent 100%)' }}
+        className="absolute inset-y-0 right-0 w-24 sm:w-40 lg:w-56 z-[1] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to left, #FAFAFA 0%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 30%, black 70%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 30%, black 70%)',
+        }}
       />
 
       {/* Bottom-left corner fade */}
