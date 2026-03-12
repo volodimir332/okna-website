@@ -5,27 +5,27 @@ import { motion } from "framer-motion";
 const reasons = [
   {
     title: "Vlastní realizační tým",
-    description: "Žádní subdodavatelé. Pracují jen naši zkušení řemeslníci, které osobně známe.",
+    description: "Žádní subdodavatelé. Pracují jen naši řemeslníci — obkladači i kameníci.",
   },
   {
-    title: "Jedna odpovědná osoba",
-    description: "Od začátku do konce komunikujete s jedním člověkem, který ví o všem.",
+    title: "Jedna osoba, celý projekt",
+    description: "Od prvního hovoru až po předání klíčů komunikujete s jedním člověkem.",
   },
   {
-    title: "Hotovo v termínu",
-    description: "Dodržujeme dohodnuté termíny. Pokud ne, kompenzujeme vám to.",
+    title: "Výsledek vidíte předem",
+    description: "3D vizualizace zdarma ještě před zahájením prací. Žádná překvapení.",
   },
   {
-    title: "Pojištění odpovědnosti",
-    description: "Jsme plně pojištění pro případ jakýchkoliv škod během realizace.",
+    title: "Pevná cena a termín",
+    description: "Cena se po podpisu smlouvy nemění. Termín dodržíme — nebo kompenzujeme.",
   },
   {
-    title: "Záruka 60 měsíců",
-    description: "Na všechny práce poskytujeme nadstandardní záruku tři roky.",
+    title: "Pojištění a záruka 60 měsíců",
+    description: "Jsme plně pojištění a na veškeré práce poskytujeme záruku 5 let.",
   },
   {
-    title: "Kvalitní materiály",
-    description: "Pracujeme pouze s ověřenými značkami: RAKO, Geberit, Grohe.",
+    title: "Obklady i přírodní kámen",
+    description: "Keramika, velkoformáty i přírodní kámen — vše pod jednou střechou.",
   },
 ];
 
@@ -62,7 +62,7 @@ export function Measurement() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                Výjezd na místo zdarma do 30 km od Ostravy. Nad 30 km dle dohody.
+                Působíme v Moravskoslezském a Olomouckém kraji.
               </motion.p>
             </div>
 
