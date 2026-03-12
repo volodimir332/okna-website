@@ -17,8 +17,8 @@ export default function Home() {
       <Header />
       <main className="relative z-10">
         <Hero />
-        <Specializace />
         <ProcessSteps />
+        <Specializace />
         <Gallery />
         <Quiz />
         <Measurement />
