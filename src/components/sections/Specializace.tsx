@@ -4,41 +4,42 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Row 1 — obklady, dlažby, plitka (tiles)
 const row1 = [
   { title: "Rekonstrukce koupelen", subtitle: "Kompletní přestavba na klíč", image: "/images/robota/IMG_5364.jpg", href: "/sluzby/rekonstrukce-koupelny" },
-  { title: "Kamenné fasády", subtitle: "Obložení fasád přírodním kamenem", image: "/images/kamen/kamen-6.jpg", href: "/svet-kamene" },
   { title: "Velkoformátové obklady", subtitle: "Obklady 60×120 cm a větší", image: "/images/robota/IMG_2512.jpg", href: "/sluzby/velkoformatove-obklady" },
-  { title: "Kamenný krb", subtitle: "Obložení krbů žulou a mramorem", image: "/images/kamen/kamen-9.jpg", href: "/svet-kamene" },
   { title: "Obklady schodišť", subtitle: "Interiérové i exteriérové schody", image: "/images/robota/IMG_2526.jpg", href: "/sluzby" },
-  { title: "Kamenný krb", subtitle: "Obložení krbu přírodním kamenem", image: "/images/kamen/kamen-25.jpg", href: "/svet-kamene" },
   { title: "Sprchové kouty", subtitle: "Walk-in sprchy a bezbariérová řešení", image: "/images/robota/IMG_3892.jpg", href: "/sluzby/obklady-koupelen" },
-  { title: "Kamenné zdi", subtitle: "Dekorativní stěny z přírodního kamene", image: "/images/kamen/kamen-3.jpg", href: "/svet-kamene" },
   { title: "Dekorativní obklady", subtitle: "Mozaiky, vzory a kombinace materiálů", image: "/images/robota/IMG_6078.jpg", href: "/sluzby/obklady-kuchyni" },
-  { title: "Montáž kamene", subtitle: "Profesionální pokládka a broušení", image: "/images/kamen/kamen-7.jpg", href: "/svet-kamene" },
   { title: "Terasy a balkony", subtitle: "Mrazuvzdorná dlažba venkovních ploch", image: "/images/robota/IMG_3670.jpg", href: "/sluzby" },
-  { title: "Kamenné barbecue", subtitle: "Venkovní grily a posezení z kamene", image: "/images/kamen/kamen-13.jpg", href: "/svet-kamene" },
-  { title: "Travertinová dlažba", subtitle: "Crazy pave vzor z přírodního travertinu", image: "/images/kamen/kamen-19.jpg", href: "/svet-kamene" },
-  { title: "Kamenný krb rustikal", subtitle: "Rustikální krb z přírodního kamene", image: "/images/kamen/kamen-22.jpg", href: "/svet-kamene" },
-  { title: "Moderní kamenný krb", subtitle: "Minimalistický krb s kamenným obložením", image: "/images/kamen/kamen-24.jpg", href: "/svet-kamene" },
-];
-
-const row2 = [
-  { title: "Kamenná sprcha", subtitle: "Sprchové kouty z přírodního kamene", image: "/images/kamen/kamen-10.jpg", href: "/svet-kamene" },
   { title: "Obklady koupelen", subtitle: "Stěnové obklady do mokrých prostor", image: "/images/robota/IMG_3920.jpg", href: "/sluzby/obklady-koupelen" },
-  { title: "Kamenné obložení", subtitle: "Fasáda domu přírodním kamenem", image: "/images/kamen/kamen-5.jpg", href: "/svet-kamene" },
   { title: "Komerční prostory", subtitle: "Obchody, restaurace, kanceláře", image: "/images/robota/IMG_3660.jpg", href: "/sluzby" },
-  { title: "Moderní kuchyně", subtitle: "Kamenný krb a ostrov s podsvícením", image: "/images/kamen/kamen-11.jpg", href: "/svet-kamene" },
   { title: "Podlahy a dlažby", subtitle: "Keramické podlahy a imitace dřeva", image: "/images/robota/IMG_5749.jpg", href: "/sluzby" },
-  { title: "Kamenná stěna", subtitle: "Exteriérové oplocení přírodním kamenem", image: "/images/kamen/kamen-16.jpg", href: "/svet-kamene" },
   { title: "Obklady kuchyní", subtitle: "Obklady za kuchyňskou linku", image: "/images/robota/IMG_3993.jpg", href: "/sluzby/obklady-kuchyni" },
-  { title: "Stavba z kamene", subtitle: "Kamenné zdi a opěrné stěny", image: "/images/kamen/kamen-8.jpg", href: "/svet-kamene" },
   { title: "Venkovní schody", subtitle: "Vstupní a zahradní schodiště", image: "/images/robota/IMG_3999.jpg", href: "/sluzby" },
   { title: "Luxusní koupelna", subtitle: "Mramorové obklady od podlahy po strop", image: "/images/robota/IMG_5564.jpg", href: "/sluzby/obklady-koupelen" },
-  { title: "Kamenné detaily", subtitle: "Řezání a broušení kamene na míru", image: "/images/kamen/kamen-12.jpg", href: "/svet-kamene" },
-  { title: "Crazy Pave travertin", subtitle: "Nepravidelná kamenná dlažba", image: "/images/kamen/kamen-20.jpg", href: "/svet-kamene" },
-  { title: "Travertin detail", subtitle: "Precizní spárování přírodního kamene", image: "/images/kamen/kamen-21.jpg", href: "/svet-kamene" },
+];
+
+// Row 2 — přírodní kámen (stone)
+const row2 = [
+  { title: "Kamenné fasády", subtitle: "Obložení fasád přírodním kamenem", image: "/images/kamen/kamen-6.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb", subtitle: "Obložení krbů žulou a mramorem", image: "/images/kamen/kamen-9.jpg", href: "/svet-kamene" },
+  { title: "Kamenné zdi", subtitle: "Dekorativní stěny z přírodního kamene", image: "/images/kamen/kamen-3.jpg", href: "/svet-kamene" },
+  { title: "Montáž kamene", subtitle: "Profesionální pokládka a broušení", image: "/images/kamen/kamen-7.jpg", href: "/svet-kamene" },
+  { title: "Kamenné barbecue", subtitle: "Venkovní grily a posezení z kamene", image: "/images/kamen/kamen-13.jpg", href: "/svet-kamene" },
+  { title: "Kamenná sprcha", subtitle: "Sprchové kouty z přírodního kamene", image: "/images/kamen/kamen-10.jpg", href: "/svet-kamene" },
+  { title: "Kamenné obložení", subtitle: "Fasáda domu přírodním kamenem", image: "/images/kamen/kamen-5.jpg", href: "/svet-kamene" },
+  { title: "Kamenná stěna", subtitle: "Exteriérové oplocení přírodním kamenem", image: "/images/kamen/kamen-16.jpg", href: "/svet-kamene" },
+  { title: "Stavba z kamene", subtitle: "Kamenné zdi a opěrné stěny", image: "/images/kamen/kamen-8.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb rustikal", subtitle: "Rustikální krb z přírodního kamene", image: "/images/kamen/kamen-22.jpg", href: "/svet-kamene" },
   { title: "Kamenné steenstrips", subtitle: "Mediteránní kamenné obložení krbu", image: "/images/kamen/kamen-23.jpg", href: "/svet-kamene" },
-  { title: "Kamenný krb detail", subtitle: "Přírodní kámen s černým krbovým vložkou", image: "/images/kamen/kamen-25.jpg", href: "/svet-kamene" },
+  { title: "Moderní kamenný krb", subtitle: "Minimalistický krb s kamenným obložením", image: "/images/kamen/kamen-24.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb detail", subtitle: "Přírodní kámen s černou krbovou vložkou", image: "/images/kamen/kamen-25.jpg", href: "/svet-kamene" },
+  { title: "Travertinová dlažba", subtitle: "Crazy pave vzor z přírodního travertinu", image: "/images/kamen/kamen-19.jpg", href: "/svet-kamene" },
+  { title: "Crazy Pave travertin", subtitle: "Nepravidelná kamenná dlažba", image: "/images/kamen/kamen-20.jpg", href: "/svet-kamene" },
+  { title: "Kamenné detaily", subtitle: "Řezání a broušení kamene na míru", image: "/images/kamen/kamen-12.jpg", href: "/svet-kamene" },
+  { title: "Moderní kuchyně", subtitle: "Kamenný ostrov s podsvícením", image: "/images/kamen/kamen-11.jpg", href: "/svet-kamene" },
+  { title: "Travertin detail", subtitle: "Precizní spárování přírodního kamene", image: "/images/kamen/kamen-21.jpg", href: "/svet-kamene" },
 ];
 
 function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof row1; direction?: "left" | "right"; speed?: number }) {
