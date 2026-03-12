@@ -140,10 +140,10 @@ export function Hero() {
             <Button
               variant="secondary"
               size="md"
-              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-[#6B7AE8] !border-[#6B7AE8]/40 hover:!bg-[#6B7AE8]/10"
+              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-black !border-black/30 hover:!bg-black/10"
               onClick={() => scrollToSection("#galerie")}
             >
-              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-[#6B7AE8] text-[#6B7AE8]" />
+              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-black text-black" />
               <span className="hidden sm:inline">Zobrazit realizace</span>
               <span className="sm:hidden">Realizace</span>
             </Button>
