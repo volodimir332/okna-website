@@ -142,10 +142,10 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-              <h3 className="text-white font-bold text-3xl sm:text-5xl leading-tight mb-1">
+              <h3 className="text-white font-bold text-2xl sm:text-3xl leading-tight mb-1">
                 {spec.title}
               </h3>
-              <p className="text-white/70 text-lg sm:text-2xl leading-snug">
+              <p className="text-white/70 text-sm sm:text-lg leading-snug">
                 {spec.subtitle}
               </p>
             </div>
