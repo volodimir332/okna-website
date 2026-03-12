@@ -74,21 +74,17 @@ export function ProcessSteps() {
     <section ref={containerRef} className="relative pt-16 sm:pt-24 md:pt-32 pb-4 sm:pb-8 md:pb-12">
       <div className="flex justify-center">
         <motion.div
-          className="relative bg-[#1E1E1E] overflow-hidden"
+          className="relative overflow-hidden w-full"
           style={{
-            width,
-            borderRadius,
             opacity,
             scale,
             y,
-            WebkitMaskImage: maskImage,
-            maskImage,
           }}
         >
           {/* Header */}
           <div className="px-4 pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12 lg:pt-20 lg:pb-16">
             <motion.h2
-              className="text-[1.35rem] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-4 sm:mb-12 tracking-tight leading-tight"
+              className="text-[1.35rem] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-4 sm:mb-12 tracking-tight leading-tight"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -107,7 +103,7 @@ export function ProcessSteps() {
               return (
                 <motion.div
                   key={step.number}
-                  className={`relative bg-[#1E1E1E] group h-[260px] sm:h-auto overflow-hidden rounded-xl lg:rounded-2xl ${isEven ? 'lg:-mt-6' : 'lg:mt-6'} ${isEven ? '-mt-3' : 'mt-3'}`}
+                  className={`relative bg-white shadow-md group h-[260px] sm:h-auto overflow-hidden rounded-xl lg:rounded-2xl ${isEven ? 'lg:-mt-6' : 'lg:mt-6'} ${isEven ? '-mt-3' : 'mt-3'}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -127,23 +123,23 @@ export function ProcessSteps() {
                     <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
                     {/* Number: Top-left on mobile, Bottom-left on desktop */}
-                    <div className="absolute top-3 left-3 sm:bottom-3 sm:left-3 text-white/60 sm:text-white/80 text-4xl sm:text-3xl font-bold z-10">
+                    <div className="absolute top-3 left-3 sm:bottom-3 sm:left-3 text-white/80 text-4xl sm:text-3xl font-bold z-10">
                       {step.number}
                     </div>
 
                     {/* Smooth Gradient Transition (Mobile & Desktop) */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 sm:h-24 bg-gradient-to-t from-[#1E1E1E] via-[#1E1E1E]/50 to-transparent z-0" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 sm:h-24 bg-gradient-to-t from-white via-white/50 to-transparent z-0" />
 
                     {/* Additional Mobile Strong Gradient for text readability - ONLY BOTTOM PART */}
-                    <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-[#1E1E1E] via-[#1E1E1E]/90 to-transparent sm:hidden z-0" />
+                    <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden z-0" />
                   </div>
 
                   {/* Content: Absolute bottom on mobile, Static flow on desktop */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 sm:static sm:p-4 md:p-5 z-20">
-                    <h3 className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#C7D2FE] leading-tight">
+                    <h3 className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
                       {step.title}
                     </h3>
-                    <p className="text-white/50 text-xs sm:text-xs md:text-sm mt-1 leading-snug line-clamp-1">
+                    <p className="text-gray-500 text-xs sm:text-xs md:text-sm mt-1 leading-snug line-clamp-1">
                       {step.subtitle}
                     </p>
                   </div>
