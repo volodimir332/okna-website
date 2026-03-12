@@ -7,38 +7,38 @@ import Image from "next/image";
 const steps = [
   {
     number: "01",
-    title: "Nezávazná schůzka",
-    description: "Domluvíme si schůzku přímo u vás. Přijedeme, zaměříme prostory a probereme vaše představy — ať už jde o koupelnu, obklady, dlažbu nebo kámen.",
+    title: "Bezplatná schůzka",
+    subtitle: "Přijedeme k vám, zaměříme prostor a vyslechneme vaše představy.",
     image: "/images/bathroom/IMG_6509.JPG",
   },
   {
     number: "02",
-    title: "Inspirace a představy",
-    description: "Ukažte nám fotky nebo inspiraci z internetu. Ať plánujete kamenný obklad, novou dlažbu nebo kompletní rekonstrukci — vymyslíme řešení přesně pro vás.",
+    title: "Výběr materiálu",
+    subtitle: "Společně vybereme obklady, dlažbu nebo přírodní kámen přesně pro vás.",
     image: "/images/robota/IMG_3892.jpg",
   },
   {
     number: "03",
-    title: "3D vizualizace",
-    description: "Do druhého dne od zaměření připravíme profesionální 3D návrh vašeho projektu a zašleme vám ho online ke schválení.",
+    title: "3D návrh zdarma",
+    subtitle: "Do 24 hodin dostanete vizualizaci výsledku — ještě před zahájením prací.",
     image: "/images/bathroom/IMG_6511.JPG",
   },
   {
     number: "04",
-    title: "Cenová nabídka",
-    description: "Jakmile odsouhlasíte návrh, připravíme pro vás kompletní cenovou nabídku — od materiálu po realizaci, bez skrytých nákladů.",
+    title: "Pevná cena",
+    subtitle: "Připravíme nabídku bez skrytých příplatků. Cena se nemění.",
     image: "/images/kamen/kamen-10.jpg",
   },
   {
     number: "05",
-    title: "Materiál až ke dveřím",
-    description: "Veškerý materiál — obklady, dlažbu, přírodní kámen i doplňky — vám doručíme přesně na čas, kdy jej budete potřebovat.",
+    title: "Materiál zajistíme",
+    subtitle: "Veškerý materiál objednáme a doručíme přesně na čas.",
     image: "/images/kamen/kamen-3.jpg",
   },
   {
     number: "06",
-    title: "Realizace na klíč",
-    description: "Náš tým profesionálů provede kompletní realizaci od obkladů po kamenné prvky. Pevná cena, jasný termín, záruka 60 měsíců.",
+    title: "Předání hotového díla",
+    subtitle: "Tým odborníků provede práci precizně a předá vám čistý prostor.",
     image: "/images/kamen/kamen-7.jpg",
   },
 ];
@@ -143,6 +143,9 @@ export function ProcessSteps() {
                     <h3 className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#C7D2FE] leading-tight">
                       {step.title}
                     </h3>
+                    <p className="text-white/50 text-xs sm:text-xs md:text-sm mt-1 leading-snug line-clamp-1">
+                      {step.subtitle}
+                    </p>
                   </div>
                 </motion.div>
               );
