@@ -2,7 +2,6 @@ import { Header, Footer } from "@/components/layout";
 import {
   Hero,
   ProcessSteps,
-  Packages,
   Measurement,
   Gallery,
   Quiz,
@@ -20,7 +19,6 @@ export default function Home() {
         <Hero />
         <Specializace />
         <ProcessSteps />
-        <Packages />
         <Gallery />
         <Quiz />
         <Measurement />
