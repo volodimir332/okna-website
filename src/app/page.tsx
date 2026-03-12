@@ -18,8 +18,8 @@ export default function Home() {
       <Header />
       <main className="relative z-10">
         <Hero />
-        <ProcessSteps />
         <Specializace />
+        <ProcessSteps />
         <Packages />
         <Gallery />
         <Quiz />
