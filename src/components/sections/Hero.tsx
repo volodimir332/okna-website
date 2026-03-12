@@ -37,9 +37,8 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
     return (
       <>
         {lines.map((line, i) => {
-          const isGradient = i >= totalLines - 1;
           return (
-            <span key={i} className={isGradient ? 'text-gradient' : undefined} style={isGradient ? { WebkitTextFillColor: 'transparent' } : undefined}>
+            <span key={i}>
               {line}
               {i < lines.length - 1 && <br />}
             </span>
@@ -53,7 +52,7 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
     <span className="relative">
       {renderText()}
       <motion.span
-        className="inline-block w-[3px] h-[0.9em] bg-[#6B7AE8] ml-1 align-middle"
+        className="inline-block w-[3px] h-[0.9em] bg-black ml-1 align-middle"
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
       />
@@ -117,13 +116,13 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-white drop-shadow-lg" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
+          <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-black" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
             <span className="sr-only">Precizní obklady a přírodní kámen.</span>
 
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-lg px-2 sm:px-0 drop-shadow-md">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white max-w-lg px-2 sm:px-0">
             Pevná cena. Jasný termín. Moravskoslezský kraj.
           </p>
 
@@ -140,10 +139,10 @@ export function Hero() {
             <Button
               variant="secondary"
               size="md"
-              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-[#6B7AE8] !border-[#6B7AE8]/40 hover:!bg-[#6B7AE8]/10"
+              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-black !border-black/30 hover:!bg-black/10"
               onClick={() => scrollToSection("#galerie")}
             >
-              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-[#6B7AE8] text-[#6B7AE8]" />
+              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-black text-black" />
               <span className="hidden sm:inline">Zobrazit realizace</span>
               <span className="sm:hidden">Realizace</span>
             </Button>
