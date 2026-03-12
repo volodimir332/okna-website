@@ -18,6 +18,8 @@ const row1 = [
   { title: "Terasy a balkony", subtitle: "Mrazuvzdorná dlažba venkovních ploch", image: "/images/robota/IMG_3670.jpg", href: "/sluzby" },
   { title: "Kamenné barbecue", subtitle: "Venkovní grily a posezení z kamene", image: "/images/kamen/kamen-13.jpg", href: "/svet-kamene" },
   { title: "Travertinová dlažba", subtitle: "Crazy pave vzor z přírodního travertinu", image: "/images/kamen/kamen-19.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb rustikal", subtitle: "Rustikální krb z přírodního kamene", image: "/images/kamen/kamen-22.jpg", href: "/svet-kamene" },
+  { title: "Moderní kamenný krb", subtitle: "Minimalistický krb s kamenným obložením", image: "/images/kamen/kamen-24.jpg", href: "/svet-kamene" },
 ];
 
 const row2 = [
@@ -35,6 +37,8 @@ const row2 = [
   { title: "Kamenné detaily", subtitle: "Řezání a broušení kamene na míru", image: "/images/kamen/kamen-12.jpg", href: "/svet-kamene" },
   { title: "Crazy Pave travertin", subtitle: "Nepravidelná kamenná dlažba", image: "/images/kamen/kamen-20.jpg", href: "/svet-kamene" },
   { title: "Travertin detail", subtitle: "Precizní spárování přírodního kamene", image: "/images/kamen/kamen-21.jpg", href: "/svet-kamene" },
+  { title: "Kamenné steenstrips", subtitle: "Mediteránní kamenné obložení krbu", image: "/images/kamen/kamen-23.jpg", href: "/svet-kamene" },
+  { title: "Kamenný krb detail", subtitle: "Přírodní kámen s černým krbovým vložkou", image: "/images/kamen/kamen-25.jpg", href: "/svet-kamene" },
 ];
 
 function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof row1; direction?: "left" | "right"; speed?: number }) {
