@@ -1,91 +1,111 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Gift, Check, Phone } from "lucide-react";
+import {
+  ArrowLeft, ArrowRight, Check, Phone, User, Mail, MessageSquare,
+  ShowerHead, Flame, Building2, Footprints, UtensilsCrossed, Sun,
+  RulerIcon, Move, BarChart3, Warehouse,
+} from "lucide-react";
 
-const steps = [
+const CZECH_MONTHS = [
+  "ledna", "února", "března", "dubna", "května", "června",
+  "července", "srpna", "září", "října", "listopadu", "prosince",
+];
+
+const stepQuestions = [
   {
     id: 1,
     question: "Co vás zajímá?",
     subtitle: "Vyberte typ práce, o který máte zájem",
     options: [
-      { value: "koupelna", label: "Rekonstrukce koupelny", emoji: "🚿" },
-      { value: "krb", label: "Kamenný krb", emoji: "🔥" },
-      { value: "fasada", label: "Kamenná fasáda", emoji: "🏠" },
-      { value: "schody", label: "Obklady schodů", emoji: "🪜" },
-      { value: "kuchyn", label: "Obklady kuchyně", emoji: "🍳" },
-      { value: "terasa", label: "Terasa / balkón", emoji: "☀️" },
+      { value: "koupelna", label: "Rekonstrukce koupelny", icon: "ShowerHead" },
+      { value: "krb", label: "Kamenný krb", icon: "Flame" },
+      { value: "fasada", label: "Kamenná fasáda", icon: "Building2" },
+      { value: "schody", label: "Obklady schodů", icon: "Footprints" },
+      { value: "kuchyn", label: "Obklady kuchyně", icon: "UtensilsCrossed" },
+      { value: "terasa", label: "Terasa / balkón", icon: "Sun" },
     ],
   },
   {
     id: 2,
-    question: "Kdy to plánujete?",
-    subtitle: "Kdy byste chtěli začít?",
+    question: "Jaký je přibližný rozsah?",
+    subtitle: "Pomohou nám to lépe nacenit",
     options: [
-      { value: "asap", label: "Co nejdříve", emoji: "⚡" },
-      { value: "mesic", label: "Do měsíce", emoji: "📅" },
-      { value: "3mesice", label: "Do 3 měsíců", emoji: "🗓️" },
-      { value: "neznam", label: "Zatím se rozhlížím", emoji: "👀" },
-    ],
-  },
-  {
-    id: 3,
-    question: "Máte už vybraný materiál?",
-    subtitle: "Pomůžeme vám s výběrem, pokud potřebujete",
-    options: [
-      { value: "ano", label: "Ano, mám vybraný", emoji: "✅" },
-      { value: "castecne", label: "Částečně", emoji: "🤔" },
-      { value: "ne", label: "Ne, potřebuji poradit", emoji: "💡" },
+      { value: "do5", label: "Do 5 m²", icon: "RulerIcon", sub: "malý prostor" },
+      { value: "5-10", label: "5–10 m²", icon: "Move", sub: "střední" },
+      { value: "10-20", label: "10–20 m²", icon: "BarChart3", sub: "velký" },
+      { value: "nad20", label: "Nad 20 m²", icon: "Warehouse", sub: "komerční / speciální" },
     ],
   },
 ];
 
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  ShowerHead, Flame, Building2, Footprints, UtensilsCrossed, Sun,
+  RulerIcon, Move, BarChart3, Warehouse,
+};
+
 export function Quiz() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [isComplete, setIsComplete] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", note: "" });
+  const [monthName, setMonthName] = useState("měsíce");
 
-  const currentQuestion = steps[currentStep];
+  useEffect(() => {
+    setMonthName(CZECH_MONTHS[new Date().getMonth()]);
+  }, []);
+
+  const currentQuestion = stepQuestions[currentStep];
+  const totalSteps = stepQuestions.length + 1;
+  const progressStep = showForm ? totalSteps : currentStep + 1;
 
   const handleSelect = (stepId: number, value: string) => {
     setAnswers((prev) => ({ ...prev, [stepId]: value }));
     setTimeout(() => {
-      if (currentStep < steps.length - 1) {
+      if (currentStep < stepQuestions.length - 1) {
         setCurrentStep(currentStep + 1);
       } else {
-        setIsComplete(true);
+        setShowForm(true);
       }
     }, 300);
   };
 
   const handleBack = () => {
-    if (isComplete) {
-      setIsComplete(false);
+    if (showForm) {
+      setShowForm(false);
     } else if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-  };
+    setIsSubmitting(true);
+    try {
+      const interestLabel = stepQuestions[0].options.find(o => o.value === answers[1])?.label || answers[1];
+      const scopeOption = stepQuestions[1].options.find(o => o.value === answers[2]);
+      const scopeLabel = scopeOption ? `${scopeOption.label} (${"sub" in scopeOption ? scopeOption.sub : ""})` : answers[2];
 
-  const handleReset = () => {
-    setCurrentStep(0);
-    setAnswers({});
-    setIsComplete(false);
-    setPhone("");
-    setSubmitted(false);
-  };
-
-  const getDiscountLabel = () => {
-    const interest = answers[1];
-    if (interest === "koupelna" || interest === "fasada") return "10 %";
-    return "7 %";
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          preferredDate: `[kviz-bonus] Zájem: ${interestLabel} | Rozsah: ${scopeLabel}`,
+          preferredTime: form.note || "",
+        }),
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -98,28 +118,24 @@ export function Quiz() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 bg-[#6B7AE8]/10 text-[#6B7AE8] px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <Gift className="w-4 h-4" />
-            Získejte slevu za 30 sekund
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            3 otázky = sleva na projekt
+            3 otázky = sleva −15 %
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base">
-            Odpovězte a získejte slevu na vaši realizaci
+          <p className="text-gray-400 text-sm sm:text-base max-w-lg mx-auto">
+            Odpovězte na 3 otázky a získejte slevu −15 % na jakoukoliv realizaci do konce {monthName}.
           </p>
         </motion.div>
 
         {/* Progress bar */}
         <div className="mb-8 max-w-md mx-auto">
           <div className="flex items-center gap-2 mb-2">
-            {steps.map((_, i) => (
+            {Array.from({ length: totalSteps }).map((_, i) => (
               <div key={i} className="flex-1 h-1.5 rounded-full overflow-hidden bg-gray-200">
                 <motion.div
                   className="h-full bg-[#6B7AE8] rounded-full"
                   initial={{ width: 0 }}
                   animate={{
-                    width: i < currentStep || isComplete ? "100%" : i === currentStep && !isComplete ? "50%" : "0%",
+                    width: i < progressStep - 1 || submitted ? "100%" : i === progressStep - 1 ? "50%" : "0%",
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -127,13 +143,14 @@ export function Quiz() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400">
-            {isComplete ? "Hotovo!" : `Krok ${currentStep + 1} ze ${steps.length}`}
+            {submitted ? "Hotovo!" : `Krok ${progressStep} ze ${totalSteps}`}
+            {!submitted && " · Zabere to 30 sekund. Žádné závazky."}
           </p>
         </div>
 
         {/* Content */}
         <AnimatePresence mode="wait">
-          {!isComplete ? (
+          {!showForm && !submitted ? (
             <motion.div
               key={currentStep}
               initial={{ opacity: 0, x: 30 }}
@@ -149,26 +166,38 @@ export function Quiz() {
                 <p className="text-gray-400 text-sm">{currentQuestion.subtitle}</p>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className={`grid gap-3 ${currentStep === 0 ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"}`}>
                 {currentQuestion.options.map((option) => {
                   const isSelected = answers[currentQuestion.id] === option.value;
+                  const IconComponent = iconMap[option.icon];
                   return (
                     <button
                       key={option.value}
                       onClick={() => handleSelect(currentQuestion.id, option.value)}
                       className={`group relative p-4 sm:p-5 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer ${
                         isSelected
-                          ? "border-[#6B7AE8] bg-[#6B7AE8]/5 scale-[1.02]"
+                          ? "border-[#6B7AE8] bg-[#6B7AE8] scale-[1.02]"
                           : "border-gray-200 bg-white hover:border-[#6B7AE8]/40 hover:shadow-md"
                       }`}
                     >
-                      <span className="text-2xl mb-2 block">{option.emoji}</span>
-                      <span className="text-sm sm:text-base font-medium text-gray-800 leading-tight block">
+                      {IconComponent && (
+                        <IconComponent
+                          className={`w-6 h-6 mb-2 ${isSelected ? "text-white" : "text-[#6B7AE8]"}`}
+                        />
+                      )}
+                      <span className={`text-sm sm:text-base font-medium leading-tight block ${
+                        isSelected ? "text-white" : "text-gray-800"
+                      }`}>
                         {option.label}
                       </span>
+                      {"sub" in option && option.sub && (
+                        <span className={`text-xs mt-0.5 block ${
+                          isSelected ? "text-white/70" : "text-gray-400"
+                        }`}>{option.sub}</span>
+                      )}
                       {isSelected && (
-                        <div className="absolute top-2 right-2 w-5 h-5 bg-[#6B7AE8] rounded-full flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white" />
+                        <div className="absolute top-2 right-2 w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                          <Check className="w-3 h-3 text-[#6B7AE8]" />
                         </div>
                       )}
                     </button>
@@ -176,7 +205,6 @@ export function Quiz() {
                 })}
               </div>
 
-              {/* Back */}
               <div className="flex justify-center mt-6">
                 <button
                   onClick={handleBack}
@@ -192,89 +220,91 @@ export function Quiz() {
                 </button>
               </div>
             </motion.div>
-          ) : !submitted ? (
+          ) : showForm && !submitted ? (
             <motion.div
-              key="discount"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center"
+              key="form"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.2 }}
             >
-              {/* Discount reveal */}
-              <div className="mb-8">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.2 }}
-                  className="w-20 h-20 rounded-full bg-[#6B7AE8] flex items-center justify-center mx-auto mb-5"
-                >
-                  <Gift className="w-10 h-10 text-white" />
-                </motion.div>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-gray-500 text-sm mb-2"
-                >
-                  Vaše sleva na realizaci
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="text-5xl sm:text-6xl font-extrabold text-[#6B7AE8] mb-2"
-                >
-                  {getDiscountLabel()}
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="text-gray-400 text-sm"
-                >
-                  Zanechte telefon a sleva je vaše
-                </motion.p>
+              <div className="text-center mb-6">
+                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-1">
+                  Kam vám máme zavolat?
+                </h3>
+                <p className="text-gray-400 text-sm">Ozve se vám přímo mistr — žádné call centrum.</p>
               </div>
 
-              {/* Phone form */}
-              <motion.form
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-                className="max-w-sm mx-auto space-y-3"
-              >
+              <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-3">
                 <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Váš telefon"
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Jméno *"
                     required
                     className="w-full pl-12 pr-5 py-4 rounded-xl bg-white border-2 border-gray-200 focus:border-[#6B7AE8] focus:ring-2 focus:ring-[#6B7AE8]/20 outline-none transition-all text-gray-900 font-medium"
                     style={{ fontSize: "16px" }}
                   />
                 </div>
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    placeholder="Telefon *"
+                    required
+                    className="w-full pl-12 pr-5 py-4 rounded-xl bg-white border-2 border-gray-200 focus:border-[#6B7AE8] focus:ring-2 focus:ring-[#6B7AE8]/20 outline-none transition-all text-gray-900 font-medium"
+                    style={{ fontSize: "16px" }}
+                  />
+                </div>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="Email (nepovinné)"
+                    className="w-full pl-12 pr-5 py-4 rounded-xl bg-white border-2 border-gray-200 focus:border-[#6B7AE8] focus:ring-2 focus:ring-[#6B7AE8]/20 outline-none transition-all text-gray-900 font-medium"
+                    style={{ fontSize: "16px" }}
+                  />
+                </div>
+                <div className="relative">
+                  <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+                  <textarea
+                    value={form.note}
+                    onChange={(e) => setForm({ ...form, note: e.target.value })}
+                    placeholder="Popište váš projekt v pár slovech (nepovinné)"
+                    rows={3}
+                    className="w-full pl-12 pr-5 py-3 rounded-xl bg-white border-2 border-gray-200 focus:border-[#6B7AE8] focus:ring-2 focus:ring-[#6B7AE8]/20 outline-none transition-all text-gray-900 resize-none"
+                    style={{ fontSize: "16px" }}
+                  />
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full px-6 py-4 rounded-xl font-bold bg-[#6B7AE8] hover:bg-[#5A69D4] text-white shadow-lg text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-4 rounded-xl font-bold bg-[#6B7AE8] hover:bg-[#5A69D4] disabled:opacity-60 text-white shadow-lg text-base transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  Získat slevu {getDiscountLabel()}
-                  <ArrowRight className="w-5 h-5" />
+                  {isSubmitting ? "Odesílám..." : "Odeslat a získat bonus"}
+                  {!isSubmitting && <ArrowRight className="w-5 h-5" />}
                 </button>
                 <p className="text-xs text-gray-400 text-center">
-                  Zavoláme do 2 hodin. Bez závazků.
+                  Ozve se vám přímo mistr do 2 hodin. Žádný call centrum.
                 </p>
-              </motion.form>
+              </form>
 
-              <button
-                onClick={handleBack}
-                className="mt-4 text-sm text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                <ArrowLeft className="w-3 h-3 inline mr-1" />
-                Zpět
-              </button>
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={handleBack}
+                  className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <ArrowLeft className="w-3 h-3" />
+                  Zpět
+                </button>
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -287,20 +317,17 @@ export function Quiz() {
                 <Check className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Výborně, sleva je vaše!
+                Děkujeme! Vaše poptávka byla odeslána.
               </h3>
-              <p className="text-gray-500 mb-1">
-                Sleva <span className="font-bold text-[#6B7AE8]">{getDiscountLabel()}</span> vám bude uplatněna při realizaci.
+              <p className="text-gray-500 mb-4">
+                Zavoláme vám do 2 hodin.
               </p>
-              <p className="text-gray-400 text-sm mb-6">
-                Ozveme se vám do 2 hodin.
-              </p>
-              <button
-                onClick={handleReset}
-                className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                Zkusit znovu
-              </button>
+              <div className="inline-block bg-[#6B7AE8]/10 rounded-xl px-6 py-4">
+                <p className="text-[#6B7AE8] font-bold text-lg">
+                  Vaše sleva: −15 % na jakoukoliv realizaci
+                </p>
+                <p className="text-[#6B7AE8]/70 text-sm mt-1">Platí do konce {monthName}</p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

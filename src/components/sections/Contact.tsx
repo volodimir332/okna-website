@@ -50,7 +50,7 @@ export function Contact() {
             Domluvte si<br />konzultaci
           </h2>
           <p className="text-gray-500 text-xs sm:text-base">
-            Zavoláme vám do 2 hodin a probereme váš projekt.
+            Zavoláme vám do 24 hodin a probereme váš projekt.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export function Contact() {
                 Domluvte si<br />konzultaci
               </h2>
               <p className="text-gray-500 text-base">
-                Zavoláme vám do 2 hodin a probereme váš projekt.
+                Zavoláme vám do 24 hodin a probereme váš projekt.
               </p>
             </div>
             {isSubmitted ? (
@@ -76,7 +76,7 @@ export function Contact() {
                   <Check className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-1.5 sm:mb-2">Děkujeme!</h3>
-                <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">Ozveme se vám do 2 hodin.</p>
+                <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">Ozveme se vám do 24 hodin.</p>
                 <button
                   onClick={() => {
                     setIsSubmitted(false);
@@ -171,7 +171,7 @@ export function Contact() {
                       <span className="w-5 h-5 border-2 border-gray-900/30 border-t-gray-900 rounded-full animate-spin" />
                     ) : (
                       <>
-                        Zavolám vám do 2 hodin
+                        Zavolám vám do 24 hodin
                         <ArrowRight className="w-5 h-5" />
                       </>
                     )}
@@ -250,7 +250,7 @@ export function Contact() {
               </div>
 
               <div className="mt-5 sm:mt-8 p-3 sm:p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50">
-                <p className="font-bold text-gray-900 text-sm">Odpovíme do 2 hodin</p>
+                <p className="font-bold text-gray-900 text-sm">Odpovíme do 24 hodin</p>
                 <p className="text-xs text-gray-600">Ozve se vám přímo mistr, ne operátor.</p>
               </div>
             </motion.div>

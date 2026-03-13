@@ -1,10 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Star } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import Image from "next/image";
+
+const CZECH_MONTHS = [
+  "ledna", "února", "března", "dubna", "května", "června",
+  "července", "srpna", "září", "října", "listopadu", "prosince",
+];
 
 // Full headline for typewriter
 const fullHeadline = "Precizní obklady\na přírodní kámen.";
@@ -91,8 +96,8 @@ export function Hero() {
         sizes="100vw"
       />
 
-      {/* Dark overlay 10% */}
-      <div className="absolute inset-0 bg-black/10 z-[0] pointer-events-none" />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/20 z-[0] pointer-events-none" />
 
       {/* Fade to white at bottom */}
       <div
@@ -132,45 +137,71 @@ export function Hero() {
         style={{ background: 'radial-gradient(ellipse at bottom right, #FAFAFA 0%, transparent 70%)' }}
       />
 
+      {/* White logo — fixed position, right side */}
+      <motion.img
+        src="/images/logos/logo.png"
+        alt=""
+        className="absolute z-10 right-[2%] sm:right-[5%] lg:right-[8%] top-[18%] sm:top-[20%] w-40 sm:w-56 lg:w-72 h-auto pointer-events-none"
+        style={{ filter: "brightness(0) invert(1)" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+      />
+
       {/* Content — vertically centered */}
-      <div className="relative z-10 container-custom px-4 sm:px-6 min-h-screen flex items-center justify-center">
+      <div className="relative z-10 container-custom px-4 sm:px-6 min-h-screen flex items-end sm:items-center justify-center pb-24 sm:pb-0 pt-32 sm:pt-20">
         <motion.div
-          className="text-center flex flex-col items-center max-w-4xl"
+          className="text-center flex flex-col items-center max-w-4xl mt-16 sm:mt-24"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-[#1A1A1A]" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
             <span className="sr-only">Precizní obklady a přírodní kámen.</span>
-
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white max-w-lg px-2 sm:px-0">
-            Pevná cena. Jasný termín. Moravskoslezský kraj.
+            Pokládáme obklady, dlažbu a přírodní kámen. Řemeslná kvalita, pevná cena.
           </p>
 
-          <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:px-0 mt-10 sm:mt-14 md:mt-20">
+          <div className="flex justify-center mt-10 sm:mt-14 md:mt-20">
             <Button
               variant="secondary"
               size="md"
               className="text-lg sm:text-xl px-7 sm:px-10 py-3.5 sm:py-5 !bg-white !text-[#1A1A1A] !border-white/80 hover:!bg-white/90 shadow-lg"
-              onClick={() => scrollToSection("#kviz")}
+              onClick={() => scrollToSection("#kontakt")}
             >
-              Spočítat cenu
+              Objednat konzultaci
               <ArrowRight className="w-5 h-5 sm:w-7 sm:h-7" />
             </Button>
-            <Button
-              variant="secondary"
-              size="md"
-              className="text-lg sm:text-xl px-6 sm:px-8 py-3.5 sm:py-5 !text-black !border-black/30 hover:!bg-black/10"
-              onClick={() => scrollToSection("#galerie")}
-            >
-              <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-black text-black" />
-              <span className="hidden sm:inline">Zobrazit realizace</span>
-              <span className="sm:hidden">Realizace</span>
-            </Button>
           </div>
+
+          {/* Reviews social proof — below button, left side */}
+          <motion.div
+            className="self-start ml-2 sm:-ml-12 lg:-ml-[160px] mt-32 sm:mt-16"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 2.5, duration: 0.4 }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex" style={{ marginRight: 4 }}>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-30" loading="lazy" />
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-20" style={{ marginLeft: -18 }} loading="lazy" />
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-10" style={{ marginLeft: -18 }} loading="lazy" />
+              </div>
+              <div>
+                <div className="flex gap-0.5 mb-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-[10px] sm:text-xs text-white/70 font-medium">
+                  127 spokojených zákazníků
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 

@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://obklady-ostrava.cz"),
   title: {
-    default: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
+    default: "Obklady, dlažby a přírodní kámen Ostrava | Záruka 60 měsíců | OBK",
     template: "%s | Obklady Ostrava"
   },
   description:
-    "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. 3D návrh zdarma. Pevná cena. Záruka 60 měsíců.",
+    "Precizní obklady, dlažby a přírodní kámen v Ostravě a okolí. Vlastní tým, pevná cena, záruka 60 měsíců. 800+ dokončených projektů. Zaměření zdarma.",
   keywords: [
     "rekonstrukce koupelny ostrava",
     "rekonstrukce koupelny cena",
@@ -65,6 +65,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://obklady-ostrava.cz",
+    languages: {
+      "cs": "https://obklady-ostrava.cz",
+      "x-default": "https://obklady-ostrava.cz",
+    },
   },
   openGraph: {
     type: "website",
@@ -110,15 +114,19 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "LocalBusiness",
+      "@type": "HomeAndConstructionBusiness",
       "@id": "https://obklady-ostrava.cz/#organization",
-      "name": "OBK - Obklady Ostrava",
+      "name": "OBK — Obklady Ostrava",
+      "alternateName": "IZOLASTAV, spol. s r.o.",
       "image": "https://obklady-ostrava.cz/images/logos/logo.png",
       "telephone": "+420737540605",
       "email": "info@obklady-ostrava.cz",
       "url": "https://obklady-ostrava.cz",
       "priceRange": "$",
       "openingHours": "Mo-Fr 08:00-18:00",
+      "foundingDate": "2005",
+      "taxID": "CZ64617980",
+      "description": "Precizní obklady, dlažby a přírodní kámen v Ostravě. Vlastní tým, záruka 60 měsíců.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Ostrava",
@@ -135,7 +143,9 @@ const jsonLd = {
         { "@type": "City", "name": "Havířov" },
         { "@type": "City", "name": "Karviná" },
         { "@type": "City", "name": "Frýdek-Místek" },
-        { "@type": "City", "name": "Opava" }
+        { "@type": "City", "name": "Opava" },
+        { "@type": "City", "name": "Třinec" },
+        { "@type": "City", "name": "Orlová" }
       ],
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -173,26 +183,34 @@ const jsonLd = {
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "Za jak dlouho od první poptávky mohu očekávat realizaci?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Obvykle zahájíme realizaci do 2–4 týdnů od podpisu smlouvy, v závislosti na aktuální vytíženosti."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak dlouho trvá kompletní rekonstrukce koupelny?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standardní rekonstrukce koupelny 4–6 m² trvá 14–21 pracovních dní."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jakou záruku poskytujete na odvedenou práci?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Na veškeré práce poskytujeme záruku 60 měsíců (5 let). Jsme plně pojištění."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Kolik stojí rekonstrukce koupelny v Ostravě?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Cena rekonstrukce koupelny v Ostravě se pohybuje od 115 000 Kč za malou koupelnu, přes 160 000-250 000 Kč za standardní, až po 245 000 Kč a více za nadstandardní provedení. Konečná cena závisí na velikosti, rozsahu prací a vybraných materiálech."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Jak dlouho trvá rekonstrukce koupelny?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Kompletní rekonstrukce koupelny obvykle trvá 7-14 dní v závislosti na rozsahu prací. Malá koupelna cca 7 dní, standardní 10 dní, nadstandardní 14+ dní."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Potřebuji stavební povolení na rekonstrukci koupelny?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Pokud nezasahujete do nosných konstrukcí a neměníte dispozice, stavební povolení obvykle není potřeba. V případě zásahů do nosných stěn je nutné ohlášení stavby."
+            "text": "Cena se pohybuje od 115 000 Kč za malou koupelnu, přes 160 000-250 000 Kč za standardní, až po 245 000 Kč a více za nadstandardní provedení. Konečná cena závisí na velikosti a vybraných materiálech."
           }
         }
       ]

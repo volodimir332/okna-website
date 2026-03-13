@@ -5,27 +5,27 @@ import { motion } from "framer-motion";
 const reasons = [
   {
     title: "Vlastní realizační tým",
-    description: "Žádní subdodavatelé. Pracují jen naši řemeslníci — obkladači i kameníci.",
+    description: "Žádní subdodavatelé. Pracují výhradně naši zkušení řemeslníci — obkladači i kameníci s mnohaletou praxí. Každý člen týmu prošel důkladným školením a pracuje s precizností, na kterou se můžete spolehnout.",
   },
   {
     title: "Jedna osoba, celý projekt",
-    description: "Od prvního hovoru až po předání klíčů komunikujete s jedním člověkem.",
+    description: "Od prvního hovoru až po předání klíčů komunikujete s jedním člověkem. Váš osobní projektový manažer řeší vše — materiály, harmonogram i kontrolu kvality. Žádné zmatky, žádné ztracené informace.",
   },
   {
     title: "Výsledek vidíte předem",
-    description: "3D vizualizace zdarma ještě před zahájením prací. Žádná překvapení.",
+    description: "Ještě před zahájením prací dostanete 3D vizualizaci zdarma. Uvidíte přesně, jak bude váš prostor vypadat — barvy, rozložení i detaily. Žádná překvapení, jen jistota správného rozhodnutí.",
   },
   {
     title: "Pevná cena a termín",
-    description: "Cena se po podpisu smlouvy nemění. Termín dodržíme — nebo kompenzujeme.",
+    description: "Cena se po podpisu smlouvy nemění — žádné skryté příplatky ani dodatečné náklady. Termín dodržíme, nebo kompenzujeme. Pracujeme transparentně a férově od začátku do konce.",
   },
   {
-    title: "Pojištění a záruka 60 měsíců",
-    description: "Jsme plně pojištění a na veškeré práce poskytujeme záruku 5 let.",
+    title: "Prémiové materiály",
+    description: "Používáme pouze ověřené materiály od předních evropských výrobců — Mapei, Rako, Schlüter. Správný materiál znamená dokonalý výsledek, který vydrží desítky let bez problémů.",
   },
   {
-    title: "Obklady i přírodní kámen",
-    description: "Keramika, velkoformáty i přírodní kámen — vše pod jednou střechou.",
+    title: "Čistota a pořádek na stavbě",
+    description: "Po každém pracovním dni uklízíme. Staveniště chráníme fóliemi, odpad odvážíme průběžně. Předáváme čistý prostor připravený k okamžitému užívání — bez prachu a nepořádku.",
   },
 ];
 
@@ -77,6 +77,11 @@ export function Measurement() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                 >
+                  {/* Number */}
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white/20 mb-2 block">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
                   {/* Title */}
                   <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white mb-1 sm:mb-2">
                     {reason.title}

@@ -145,8 +145,20 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 640px) 265px, 390px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+            {/* Logo watermark */}
+            <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-20 opacity-50">
+              <img
+                src="/images/logos/logo.png"
+                alt=""
+                className="w-14 h-auto sm:w-18"
+                style={{ filter: "brightness(0) invert(1)" }}
+                draggable={false}
+              />
+            </div>
+            {/* Gradient: top-down for text at top */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent" />
+            {/* Text at top */}
+            <div className="absolute top-0 left-0 right-0 p-4 sm:p-5">
               <h3 className="text-white font-bold text-2xl sm:text-4xl leading-tight mb-1">
                 {spec.title}
               </h3>
@@ -154,6 +166,42 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
                 {spec.subtitle}
               </p>
             </div>
+            {/* CTA button on every other card */}
+            {i % 2 === 1 && (
+              <>
+                {/* Dark gradient at bottom for button contrast */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector("#kontakt")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  style={{
+                    position: 'absolute',
+                    bottom: 16,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    backgroundColor: '#FFFFFF',
+                    color: '#1A1A1A',
+                    fontWeight: 600,
+                    fontSize: 13,
+                    padding: '10px 22px',
+                    borderRadius: 9999,
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    whiteSpace: 'nowrap',
+                    zIndex: 10,
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Chci to stejné
+                  <span style={{ fontSize: 14 }}>&rarr;</span>
+                </button>
+              </>
+            )}
           </Link>
         ))}
       </div>

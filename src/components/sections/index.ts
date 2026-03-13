@@ -10,3 +10,6 @@ export { TechnicalStandards } from "./TechnicalStandards";
 export { ArticlesPreview } from "./ArticlesPreview";
 export { Specializace } from "./Specializace";
 export { SvetKamene } from "./SvetKamene";
+export { Reviews } from "./Reviews";
+export { Stats } from "./Stats";
+export { UrgencyBanner } from "./UrgencyBanner";

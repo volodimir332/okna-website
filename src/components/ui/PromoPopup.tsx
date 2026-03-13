@@ -5,10 +5,23 @@ import { motion } from "framer-motion";
 import { X, ArrowRight, Check } from "lucide-react";
 import Image from "next/image";
 
+const CZECH_MONTHS = [
+  "ledna", "února", "března", "dubna", "května", "června",
+  "července", "srpna", "září", "října", "listopadu", "prosince",
+];
+
+function getCurrentMonthName() {
+  return CZECH_MONTHS[new Date().getMonth()];
+}
+
 export function PromoPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const monthName = getCurrentMonthName();
 
   useEffect(() => {
     const wasShown = sessionStorage.getItem("promoPopupShown");
@@ -27,13 +40,29 @@ export function PromoPopup() {
     setIsVisible(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 4000);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Popup lead",
+          phone,
+          email,
+          preferredDate: "[popup-sleva-15%]",
+          preferredTime: "",
+        }),
+      });
+    } catch {
+      // silent fail
+    }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setTimeout(() => setIsVisible(false), 4000);
   };
 
   if (!isVisible) return null;
@@ -58,7 +87,7 @@ export function PromoPopup() {
           <div className="absolute inset-0">
             <Image
               src="/images/bathroom/IMG_6519.JPG"
-              alt="Beautiful bathroom"
+              alt="Rekonstrukce koupelny Ostrava — moderní obklady a dlažba"
               fill
               className="object-cover"
               quality={80}
@@ -67,7 +96,7 @@ export function PromoPopup() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/85 to-black/65" />
           </div>
 
-          {/* Close button - highest z-index */}
+          {/* Close button */}
           <button
             type="button"
             onClick={handleClose}
@@ -76,57 +105,89 @@ export function PromoPopup() {
             <X className="w-5 h-5 text-white" />
           </button>
 
-          {/* Scrollable Content */}
-          <div className="relative z-10 p-6 sm:p-8 pt-10 sm:pt-12 pb-6 sm:pb-8 overflow-y-auto">
+          {/* Content */}
+          <div className="relative z-10 p-6 sm:p-8 pt-10 sm:pt-12 pb-8 sm:pb-10 overflow-y-auto">
             {!isSubmitted ? (
               <>
+                {/* Urgency badge */}
+                <div className="flex justify-center mb-4">
+                  <span className="inline-block bg-red-500/20 text-red-400 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full">
+                    Zbývají pouze 2 místa tento měsíc
+                  </span>
+                </div>
+
                 {/* Header */}
-                <div className="text-center mb-5 mt-2">
+                <div className="text-center mb-5">
                   <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 drop-shadow-lg">
-                    3D návrh zdarma
+                    −15 % na realizaci
                   </h3>
                   <p className="text-white/60 text-sm sm:text-base">
-                    Uvidíte výsledek ještě před zahájením prací.
+                    Zanechte telefon a získejte slevu na jakoukoliv objednávku do konce {monthName}.
                   </p>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Váš telefon"
                     required
-                    className="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/30 focus:border-[#6B7AE8] focus:ring-2 focus:ring-[#6B7AE8]/30 outline-none transition-all text-white placeholder:text-white/60 font-medium"
-                    style={{ fontSize: '16px' }}
+                    className="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 outline-none transition-all text-white placeholder:text-white/60 font-medium"
+                    style={{ fontSize: "16px" }}
                   />
-                  <button
-                    type="submit"
-                    className="w-full px-6 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 bg-[#6B7AE8] hover:bg-[#5A69D4] text-white shadow-lg text-base cursor-pointer"
-                  >
-                    Chci 3D návrh zdarma
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Váš email (nepovinné)"
+                    className="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 outline-none transition-all text-white placeholder:text-white/60 font-medium"
+                    style={{ fontSize: "16px" }}
+                  />
+                  <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      style={{
+                        padding: "12px 32px",
+                        borderRadius: 9999,
+                        fontWeight: 600,
+                        fontSize: 15,
+                        backgroundColor: "#FFFFFF",
+                        color: "#1A1A1A",
+                        border: "none",
+                        cursor: "pointer",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 8,
+                        boxShadow: "0 4px 20px rgba(255,255,255,0.25)",
+                        opacity: isSubmitting ? 0.6 : 1,
+                      }}
+                    >
+                      {isSubmitting ? "Odesílám..." : `Získat slevu −15 %`}
+                      {!isSubmitting && <ArrowRight style={{ width: 18, height: 18 }} />}
+                    </button>
+                  </div>
                 </form>
 
-                <p className="text-center text-xs text-white/50 mt-3 font-medium">
-                  Zavoláme do 2 hodin. Bez závazků.
+                <p className="text-center text-xs text-white/50 mt-4 font-medium">
+                  Zavoláme do 24 hodin. Bez závazků.
                 </p>
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="w-16 h-16 rounded-full bg-[#6B7AE8] flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-4">
                   <Check className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Výborně!
+                  Sleva −15 % je vaše!
                 </h3>
                 <p className="text-white/90 font-medium mb-1">
-                  Váš 3D návrh je na cestě.
+                  Platí na jakoukoliv objednávku do konce {monthName}.
                 </p>
                 <p className="text-white/60 text-sm">
-                  Ozveme se vám do 2 hodin.
+                  Ozveme se vám do 24 hodin.
                 </p>
               </div>
             )}

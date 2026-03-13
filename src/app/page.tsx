@@ -4,10 +4,10 @@ import {
   ProcessSteps,
   Measurement,
   Gallery,
-  Quiz,
-  FAQ,
   Contact,
   Specializace,
+  Reviews,
+  Stats,
 } from "@/components/sections";
 import { PromoPopup, CookieConsent, WhatsAppButton } from "@/components/ui";
 
@@ -19,10 +19,10 @@ export default function Home() {
         <Hero />
         <ProcessSteps />
         <Specializace />
+        <Stats />
         <Gallery />
-        <Quiz />
+        <Reviews />
         <Measurement />
-        <FAQ />
         <Contact />
       </main>
       <Footer />

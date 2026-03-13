@@ -108,7 +108,7 @@ export function Header() {
                 size="md"
                 onClick={() => scrollToSection("#kontakt")}
               >
-                Spočítat cenu
+                Objednat konzultaci
               </Button>
             </div>
 
@@ -199,7 +199,7 @@ export function Header() {
                       className="w-full"
                       onClick={() => scrollToSection("#kontakt")}
                     >
-                      Spočítat cenu
+                      Objednat konzultaci
                     </Button>
                   </div>
                 </div>

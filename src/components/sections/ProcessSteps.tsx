@@ -48,14 +48,15 @@ export function ProcessSteps() {
   const y = useTransform(scrollYProgress, [0.15, 0.4], [60, 0]);
 
   return (
-    <section ref={containerRef} className="relative pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-12 md:pb-16">
+    <section ref={containerRef} className="relative" style={{ paddingTop: 140, paddingBottom: 140 }}>
       <motion.div
         className="container-custom"
         style={{ opacity, scale, y }}
       >
         {/* Header */}
         <motion.h2
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-8 sm:mb-10 md:mb-12 tracking-tight"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center tracking-tight"
+          style={{ marginBottom: 64 }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -71,19 +72,16 @@ export function ProcessSteps() {
             return (
               <motion.div
                 key={step.number}
-                className={`flex flex-col ${isEven ? 'lg:-mt-4' : 'lg:mt-4'} ${isEven ? '-mt-2' : 'mt-2'}`}
+                className={`flex flex-col ${index % 2 === 0 ? 'lg:-mt-4' : 'mt-6 sm:mt-8 lg:mt-4'}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                {/* Number above card — sits right on top */}
-                <span className="text-3xl sm:text-4xl font-bold text-gray-300 -mb-5 ml-3 relative z-10">
-                  {step.number}
-                </span>
-
-                {/* Card */}
                 <div className="bg-[#F0F0F0] rounded-2xl p-5 sm:p-6 flex-1 flex flex-col justify-start">
+                  <span className="text-3xl sm:text-4xl font-bold text-gray-300 mb-3">
+                    {step.number}
+                  </span>
                   <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight mb-2">
                     {step.title}
                   </h3>
