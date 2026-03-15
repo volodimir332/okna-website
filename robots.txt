@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://oknaperfect.cz/sitemap.xml
+Sitemap: https://oknaperfektostrava.cz/sitemap.xml
