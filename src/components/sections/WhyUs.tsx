@@ -28,7 +28,7 @@ const reasons = [
   {
     icon: Award,
     title: "Záruka 60 měsíců",
-    description: "Na všechny práce poskytujeme nadstandardní záruku tři roky.",
+    description: "Na všechny práce poskytujeme nadstandardní záruku 60 měsíců (5 let).",
   },
   {
     icon: Wrench,

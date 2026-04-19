@@ -9,9 +9,9 @@ import { faqJsonLd } from "@/lib/schema-helpers";
 import { PracticeExample } from "@/components/content/PracticeExample";
 
 export const metadata: Metadata = {
-  title: "Velkoformátové obklady Ostrava | OBK",
+  title: "Velkoformátové obklady Ostrava — pokládka 60×120 až 120×260",
   description:
-    "Pokládka velkoformátových obkladů v Ostravě. Formáty 60x120 až 120x260 cm. Buttering-floating, nivelace. Od 850 Kč/m². Záruka 60 měsíců.",
+    "Velkoformátové obklady Ostrava — pokládka formátů 60×120, 100×100, 120×120 až 120×260 cm. Buttering-floating, nivelace. Od 850 Kč/m². Záruka 60 měsíců.",
   alternates: {
     canonical: "https://obklady-ostrava.cz/sluzby/velkoformatove-obklady",
   },

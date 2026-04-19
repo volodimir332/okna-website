@@ -26,34 +26,37 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://obklady-ostrava.cz"),
   title: {
-    default: "Obklady, dlažby a přírodní kámen Ostrava | Záruka 60 měsíců | OBK",
+    default: "Obklady Ostrava — pokládka dlažeb, obkladů i kamene | OBK",
     template: "%s | Obklady Ostrava"
   },
   description:
-    "Precizní obklady, dlažby a přírodní kámen v Ostravě a okolí. Vlastní tým, pevná cena, záruka 60 měsíců. 800+ dokončených projektů. Zaměření zdarma.",
+    "Obkladač v Ostravě — pokládka všech druhů obkladů, dlažeb i přírodního kamene. Rekonstrukce koupelen na klíč. Vlastní tým, pevná cena, záruka 60 měsíců. 500+ projektů.",
   keywords: [
+    "obklady ostrava",
+    "obklad ostrava",
+    "obkladač ostrava",
+    "pokládka obkladů ostrava",
+    "pokládka dlažby ostrava",
+    "velkoformátové obklady ostrava",
+    "kámen ostrava",
+    "kamen ostrava",
+    "přírodní kámen ostrava",
+    "obklady slezská ostrava",
+    "obkladač slezská ostrava",
+    "dlažby ostrava",
     "rekonstrukce koupelny ostrava",
     "rekonstrukce koupelny cena",
     "koupelna na klíč ostrava",
     "rekonstrukce bytového jádra",
-    "rekonstrukce umakartového jádra",
     "rekonstrukce panelákové koupelny",
-    "přestavba koupelny ostrava",
-    "nová koupelna cena",
     "koupelny ostrava-poruba",
-    "koupelny ostrava-jih",
-    "levná rekonstrukce koupelny",
-    "kompletní rekonstrukce jádra",
-    "rekonstrukce koupelny do 100 000",
-    "bytové jádro rekonstrukce",
-    "vyzdění bytového jádra ytongem",
+    "koupelny slezská ostrava",
     "ostrava",
+    "slezská ostrava",
     "havířov",
     "karviná",
     "frýdek-místek",
     "opava",
-    "orlová",
-    "třinec",
   ],
   authors: [{ name: "OBK - Obklady Ostrava" }],
   creator: "OBK - Obklady Ostrava",
@@ -75,9 +78,9 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
     url: "https://obklady-ostrava.cz",
     siteName: "OBK - Obklady Ostrava",
-    title: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
+    title: "Obklady Ostrava — pokládka dlažeb, obkladů i kamene | OBK",
     description:
-      "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. 3D návrh zdarma. Pevná cena. Záruka 60 měsíců.",
+      "Obkladač v Ostravě — pokládáme všechny druhy obkladů, dlažeb i přírodního kamene. Rekonstrukce koupelen na klíč, pevná cena, záruka 60 měsíců.",
     images: [
       {
         url: "/opengraph-image",
@@ -89,8 +92,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Obklady, dlažby a kámen v Ostravě | Na klíč | OBK",
-    description: "Profesionální pokládka obkladů, dlažeb a přírodního kamene. Ostrava a Moravskoslezský kraj. Záruka 60 měsíců.",
+    title: "Obklady Ostrava — pokládka dlažeb, obkladů i kamene | OBK",
+    description: "Obkladač v Ostravě — všechny druhy obkladů, dlažeb i přírodní kámen. Rekonstrukce koupelen, záruka 60 měsíců.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -147,13 +150,6 @@ const jsonLd = {
         { "@type": "City", "name": "Třinec" },
         { "@type": "City", "name": "Orlová" }
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "127",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
       "sameAs": [
         "https://www.facebook.com/koupelnaostrava",
         "https://www.instagram.com/koupelnaostrava"
@@ -162,10 +158,27 @@ const jsonLd = {
     {
       "@type": "Service",
       "provider": { "@id": "https://obklady-ostrava.cz/#organization" },
-      "name": "Rekonstrukce koupelen Ostrava",
-      "description": "Kompletní rekonstrukce koupelen a bytových jader v Ostravě. Obklady, dlažby, hydroizolace, instalatérské práce.",
-      "areaServed": { "@type": "City", "name": "Ostrava" },
-      "serviceType": "Obkladačské a rekonstrukční práce"
+      "name": "Pokládka obkladů, dlažeb a přírodního kamene v Ostravě",
+      "description": "Pokládka všech druhů obkladů, dlažeb, velkoformátových obkladů a přírodního kamene. Rekonstrukce koupelen a kuchyní na klíč. Ostrava a okolí.",
+      "areaServed": [
+        { "@type": "City", "name": "Ostrava" },
+        { "@type": "AdministrativeArea", "name": "Moravskoslezský kraj" }
+      ],
+      "serviceType": "Obkladačské práce, pokládka dlažeb, přírodní kámen",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Služby OBK",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pokládka obkladů" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pokládka dlažby" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Velkoformátové obklady" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Přírodní kámen — pokládka a výroba" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rekonstrukce koupelny" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Obklady kuchyní" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hydroizolace" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podlahové topení" } }
+        ]
+      }
     },
     {
       "@type": "WebSite",

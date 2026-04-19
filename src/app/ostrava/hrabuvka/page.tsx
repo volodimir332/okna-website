@@ -168,6 +168,7 @@ export default function HrabuvkaPage() {
         <RelatedLinks
           links={[
             { title: "Obkladač Ostrava — přehled", href: "/ostrava" },
+            { title: "Obkladač Slezská Ostrava", href: "/ostrava/slezska-ostrava" },
             { title: "Obkladač Ostrava-Zábřeh", href: "/ostrava/zabreh" },
             { title: "Obkladač Ostrava-Dubina", href: "/ostrava/dubina" },
             { title: "Hydroizolace koupelny", href: "/sluzby/hydroizolace" },

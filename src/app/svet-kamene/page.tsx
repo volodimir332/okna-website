@@ -7,9 +7,9 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Přírodní kámen Ostrava — prodej, výroba, montáž | OBK",
+  title: "Kámen Ostrava — přírodní kámen, pokládka a výroba na míru",
   description:
-    "Prodáváme přírodní kámen a vyrábíme na míru. Žula, mramor, travertin, břidlice. Kuchyňské desky, parapety, krby, fasády. Ostrava a okolí.",
+    "Kámen Ostrava — prodej, pokládka a výroba z přírodního kamene. Žula, mramor, travertin, břidlice. Kuchyňské desky, parapety, krby, fasády, obklady. Záruka 60 měsíců.",
   alternates: {
     canonical: "https://obklady-ostrava.cz/svet-kamene",
   },

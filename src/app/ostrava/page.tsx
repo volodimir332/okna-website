@@ -117,6 +117,11 @@ export default function OstravaPage() {
             <strong>Moravská Ostrava</strong> — cihlové domy z přelomu století,
             velké koupelny, vysoké stropy. Jiný typ práce než v panelácích.
           </p>
+          <p>
+            <strong>Slezská Ostrava</strong> — historická část města východně
+            od Ostravice. Mix cihlových činžáků, dělnických kolonií (Muglinov,
+            Hrušov) a novějších panelových domů. Koupelny větší než v Porubě.
+          </p>
         </div>
 
         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
@@ -155,6 +160,7 @@ export default function OstravaPage() {
         <RelatedLinks
           links={[
             { title: "Obkladač Ostrava-Poruba", href: "/ostrava/poruba" },
+            { title: "Obkladač Slezská Ostrava", href: "/ostrava/slezska-ostrava" },
             { title: "Obkladač Ostrava-Zábřeh", href: "/ostrava/zabreh" },
             { title: "Obkladač Ostrava-Dubina", href: "/ostrava/dubina" },
             { title: "Obkladač Ostrava-Hrabůvka", href: "/ostrava/hrabuvka" },

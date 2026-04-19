@@ -166,6 +166,7 @@ export default function ZabrehPage() {
           links={[
             { title: "Obkladač Ostrava — přehled", href: "/ostrava" },
             { title: "Obkladač Ostrava-Poruba", href: "/ostrava/poruba" },
+            { title: "Obkladač Slezská Ostrava", href: "/ostrava/slezska-ostrava" },
             { title: "Obkladač Ostrava-Dubina", href: "/ostrava/dubina" },
             { title: "Obkladač Ostrava-Hrabůvka", href: "/ostrava/hrabuvka" },
             { title: "Rekonstrukce koupelny — ceník", href: "/cenik/rekonstrukce-koupelny" },

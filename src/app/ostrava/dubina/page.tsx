@@ -157,6 +157,7 @@ export default function DubinaPage() {
           links={[
             { title: "Obkladač Ostrava — přehled", href: "/ostrava" },
             { title: "Obkladač Ostrava-Poruba", href: "/ostrava/poruba" },
+            { title: "Obkladač Slezská Ostrava", href: "/ostrava/slezska-ostrava" },
             { title: "Obkladač Ostrava-Hrabůvka", href: "/ostrava/hrabuvka" },
             { title: "Bourací práce — ceník", href: "/cenik/bouraci-prace" },
             { title: "Rekonstrukce koupelny", href: "/sluzby/rekonstrukce-koupelny" },

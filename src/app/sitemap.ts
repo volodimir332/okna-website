@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/sluzby/podlahove-topeni", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/ostrava", priority: 0.9, changeFrequency: "monthly" as const },
     { url: "/ostrava/poruba", priority: 0.7, changeFrequency: "monthly" as const },
+    { url: "/ostrava/slezska-ostrava", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/ostrava/zabreh", priority: 0.7, changeFrequency: "monthly" as const },
     { url: "/ostrava/dubina", priority: 0.7, changeFrequency: "monthly" as const },
     { url: "/ostrava/hrabuvka", priority: 0.7, changeFrequency: "monthly" as const },
