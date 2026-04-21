@@ -8,6 +8,8 @@ import {
   Specializace,
   Reviews,
   Stats,
+  HomeArticles,
+  FAQ,
 } from "@/components/sections";
 import { PromoPopup, CookieConsent, WhatsAppButton } from "@/components/ui";
 
@@ -22,6 +24,8 @@ export default function Home() {
         <Stats />
         <Gallery />
         <Reviews />
+        <HomeArticles />
+        <FAQ />
         <Measurement />
         <Contact />
       </main>

@@ -122,6 +122,16 @@ export default function OstravaPage() {
             od Ostravice. Mix cihlových činžáků, dělnických kolonií (Muglinov,
             Hrušov) a novějších panelových domů. Koupelny větší než v Porubě.
           </p>
+          <p>
+            <strong>Mariánské Hory a Hulváky</strong> — dělnické kolonie
+            z 20.–30. let, cihlové činžáky a paneláky. Často řešíme vlhkost
+            v přízemních bytech a výměnu starých rozvodů.
+          </p>
+          <p>
+            <strong>Výškovice</strong> — velké sídliště z 70.–80. let.
+            Paneláky T08B (jádro 1800×2400 mm) a OP 1.11. Rekonstruujeme
+            tady koupelny každý měsíc.
+          </p>
         </div>
 
         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
@@ -161,10 +171,12 @@ export default function OstravaPage() {
           links={[
             { title: "Obkladač Ostrava-Poruba", href: "/ostrava/poruba" },
             { title: "Obkladač Slezská Ostrava", href: "/ostrava/slezska-ostrava" },
+            { title: "Obkladač Moravská Ostrava", href: "/ostrava/moravska-ostrava" },
+            { title: "Obkladač Mariánské Hory", href: "/ostrava/marianske-hory" },
+            { title: "Obkladač Výškovice", href: "/ostrava/vyskovice" },
             { title: "Obkladač Ostrava-Zábřeh", href: "/ostrava/zabreh" },
             { title: "Obkladač Ostrava-Dubina", href: "/ostrava/dubina" },
             { title: "Obkladač Ostrava-Hrabůvka", href: "/ostrava/hrabuvka" },
-            { title: "Ceník obkladačských prací", href: "/cenik" },
           ]}
         />
       </div>

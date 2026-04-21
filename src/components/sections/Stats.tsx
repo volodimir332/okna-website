@@ -5,9 +5,9 @@ import { Calendar, Briefcase, Users, Shield } from "lucide-react";
 import Image from "next/image";
 
 const stats = [
-  { icon: Calendar, value: "15+", label: "let na trhu" },
+  { icon: Calendar, value: "15+", label: "let praxe v Ostravě" },
   { icon: Briefcase, value: "500+", label: "dokončených projektů" },
-  { icon: Users, value: "300+", label: "spokojených zákazníků" },
+  { icon: Users, value: "127", label: "hodnocení · 4,9/5" },
   { icon: Shield, value: "5 let", label: "záruka na práci" },
 ];
 

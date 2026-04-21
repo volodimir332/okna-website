@@ -44,13 +44,16 @@ const row2 = [
 
 function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof row1; direction?: "left" | "right"; speed?: number }) {
   const [isPaused, setIsPaused] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
   const touchRef = useRef<{ x: number; time: number; offset: number } | null>(null);
   const rafRef = useRef<number>(0);
   const isTouchingRef = useRef(false);
-  const doubled = [...items, ...items];
+  // SSR: render items once for SEO (Google sees unique content only).
+  // Client: after mount, duplicate for seamless marquee loop.
+  const doubled = mounted ? [...items, ...items] : items;
   const totalWidth = items.length * 394;
   const dir = direction === "left" ? -1 : 1;
   const baseSpeed = (totalWidth / speed) * dir; // px per second
@@ -82,13 +85,19 @@ function MarqueeRow({ items, direction = "left", speed = 40 }: { items: typeof r
   }, [baseSpeed, totalWidth, dir]);
 
   useEffect(() => {
+    // Flag client mount — swaps SSR single-array to doubled for marquee
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     // Start from correct position for right-moving rows
     if (direction === "right") {
       offsetRef.current = -totalWidth;
     }
     rafRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [animate, direction, totalWidth]);
+  }, [animate, direction, totalWidth, mounted]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     isTouchingRef.current = true;
@@ -215,10 +224,11 @@ export function Specializace() {
       {/* Header stays in container */}
       <div className="container-custom mb-8 sm:mb-10">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 mb-2">
-          Co všechno umíme
+          Co všechno umíme v Ostravě
         </h2>
         <p className="text-gray-400 text-sm sm:text-base">
-          Obklady, dlažby, přírodní kámen — pokládáme všude, kde to dává smysl.
+          Obklady, dlažby a přírodní kámen — pokládáme po celé Ostravě
+          a v Moravskoslezském kraji.
         </p>
       </div>
 

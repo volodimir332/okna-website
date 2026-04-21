@@ -12,7 +12,7 @@ const CZECH_MONTHS = [
 ];
 
 // Full headline for typewriter
-const fullHeadline = "Precizní obklady\na přírodní kámen.";
+const fullHeadline = "Obklady Ostrava —\npokládka dlažeb a kamene.";
 
 function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
   const [displayText, setDisplayText] = useState("");
@@ -42,12 +42,12 @@ function TypewriterHeadline({ delay = 0 }: { delay?: number }) {
       <>
         {lines.map((line, i) => {
           if (i === 1 && line.length > 0) {
-            // Second line: "a přírodní" in medium gray, "kámen." in white
-            const parts = line.split('kámen');
+            // Second line: "pokládka dlažeb a " in medium gray, "kamene." in white
+            const parts = line.split('kamene');
             return (
               <span key={i}>
                 <span className="text-[#3D3D3D]">{parts[0]}</span>
-                {line.includes('kámen') && <span className="text-white">kámen{parts[1]}</span>}
+                {line.includes('kamene') && <span className="text-white">kamene{parts[1]}</span>}
               </span>
             );
           }
@@ -157,12 +157,13 @@ export function Hero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="mb-5 sm:mb-6 font-bold leading-[1.1] text-[#1A1A1A]" style={{ fontSize: 'clamp(2.75rem, 5vw, 5.5rem)' }}>
-            <span className="sr-only">Precizní obklady a přírodní kámen.</span>
+            <span className="sr-only">Obklady Ostrava — pokládka dlažeb, obkladů a přírodního kamene.</span>
             <span aria-hidden="true"><TypewriterHeadline delay={300} /></span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white max-w-lg px-2 sm:px-0">
-            Pokládáme obklady, dlažbu a přírodní kámen. Řemeslná kvalita, pevná cena.
+            Obkladač v Ostravě. Pokládáme obklady, dlažbu i přírodní kámen.
+            Vlastní tým, pevná cena, záruka 60 měsíců.
           </p>
 
           <div className="flex justify-center mt-10 sm:mt-14 md:mt-20">
@@ -186,9 +187,9 @@ export function Hero() {
           >
             <div className="flex items-center gap-3">
               <div className="flex" style={{ marginRight: 4 }}>
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-30" loading="lazy" />
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-20" style={{ marginLeft: -18 }} loading="lazy" />
-                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white object-cover relative z-10" style={{ marginLeft: -18 }} loading="lazy" />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#6B7AE8] to-[#5A68D6] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-30" aria-label="Martin Kovář">MK</div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#E8A86B] to-[#D6925A] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-20" style={{ marginLeft: -18 }} aria-label="Jana Svobodová">JS</div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#6BE8A8] to-[#5AD692] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-10" style={{ marginLeft: -18 }} aria-label="Tomáš Procházka">TP</div>
               </div>
               <div>
                 <div className="flex gap-0.5 mb-0.5">
@@ -197,7 +198,7 @@ export function Hero() {
                   ))}
                 </div>
                 <p className="text-[10px] sm:text-xs text-white/70 font-medium">
-                  127 spokojených zákazníků
+                  127 hodnocení · 4,9/5
                 </p>
               </div>
             </div>

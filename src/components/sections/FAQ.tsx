@@ -7,46 +7,70 @@ import { Section, SectionHeader } from "@/components/layout/Section";
 
 const faqs = [
   {
-    question: "Za jak dlouho od první poptávky mohu očekávat realizaci?",
-    answer: "Obvykle začínáme realizaci do 2–4 týdnů od schválení nabídky. Záleží na aktuální vytíženosti a složitosti projektu. Po zaměření vám sdělíme přesný termín zahájení prací.",
+    question: "Kolik stojí rekonstrukce koupelny v Ostravě?",
+    answer:
+      "V Ostravě a okolí se cena kompletní rekonstrukce panelové koupelny pohybuje od 65 000 Kč za práci bez materiálu u malé koupelny (do 4 m²). Střední koupelna 4–6 m² stojí 75 000–110 000 Kč. S materiálem a sanitou celkem 115 000–220 000 Kč. Kalkulaci zpracujeme do 48 hodin od zaměření.",
   },
   {
-    question: "Jak dlouho trvá kompletní rekonstrukce koupelny?",
-    answer: "Doba realizace závisí na rozsahu prací. Základní obnova bez bourání trvá 5–7 dní. Kompletní rekonstrukce včetně bourání umakartu obvykle 10–12 pracovních dní. Prémiové projekty s designovými prvky mohou trvat déle.",
+    question: "Jak dlouho trvá pokládka obkladů v Ostravě?",
+    answer:
+      "Pokládka obkladů v koupelně 4–6 m² trvá 3–4 pracovní dny (standardní formát 30×60 cm). Velkoformátové obklady 60×120 cm a větší 4–6 dní kvůli technice buttering-floating a nivelaci. Součástí je lepení, řezání a spárování.",
   },
   {
-    question: "Zajišťujete i bourání a odvoz starého materiálu?",
-    answer: "Ano, kompletně. Zajistíme bourací práce, odvoz a likvidaci veškerého odpadu včetně starých obkladů, sanity a umakartu. Vše je zahrnuto v ceně realizace.",
+    question: "Pracujete i o víkendu?",
+    answer:
+      "Standardně pracujeme Po–Pá 8:00–18:00. Zaměření v Ostravě provedeme po dohodě i o víkendu zdarma. U urgentních projektů jsme schopni domluvit i víkendové práce za příplatek.",
   },
   {
-    question: "Kdy budu vědět přesnou celkovou cenu realizace?",
-    answer: "Přesnou cenu vám sdělíme po odborném zaměření, které provede náš technik přímo u vás doma. Zaměření je zcela zdarma a nezávazné.",
+    question: "Jaké dáváte záruky na práci?",
+    answer:
+      "Na všechny obkladačské a rekonstrukční práce poskytujeme nadstandardní záruku 60 měsíců (5 let). Záruka pokrývá odlepení obkladů, praskliny ve spárách, netěsnost hydroizolace. Jsme plně pojištění pro případ škod.",
   },
   {
-    question: "Bude v bytě po dobu rekonstrukce funkční elektrika a voda?",
-    answer: "Ano, zajistíme provizorní napojení elektřiny a vody tak, abyste mohli využívat ostatní části bytu. Krátkodobé odstávky jsou nutné pouze při napojování nových rozvodů.",
+    question: "Pracujete i mimo Ostravu?",
+    answer:
+      "Ano. Pokrýváme celý Moravskoslezský kraj — Havířov, Karviná, Frýdek-Místek, Opava, Třinec, Orlová, Bohumín, Nový Jičín, Kopřivnice. Dojezd do 50 km od Ostravy neúčtujeme. Dále po dohodě.",
   },
   {
-    question: "Můžeme se domluvit na změnách v průběhu stavby?",
-    answer: "Menší změny jsou možné i během realizace. U větších úprav záleží na fázi projektu. Doporučujeme všechny detaily promyslet při zaměření, abychom předešli zpoždění a vícenákladům.",
+    question: "Jak dlouho dopředu se mám objednat?",
+    answer:
+      "Aktuální čekací doba na zahájení prací v Ostravě je 3–5 týdnů. Zaměření a písemnou kalkulaci zpracujeme do týdne od zavolání. Doporučujeme vybrat materiál co nejdřív — dodací lhůty obkladů bývají 1–3 týdny.",
   },
   {
-    question: "Můžeme po dobu realizace bydlet doma?",
-    answer: "Ano, ve většině případů je to možné. Práce probíhají pouze v prostoru koupelny. Zajistíme zakrytí a ochranu ostatních prostor proti prachu a nečistotám.",
+    question: "Kolik stojí pokládka dlažby v Ostravě?",
+    answer:
+      "Standardní dlažba 60×60 cm 550–800 Kč/m² (včetně vyrovnání podkladu a spárování). Velkoformát 120×120 cm 800–1 200 Kč/m². Dlažba s podlahovým topením 950–1 400 Kč/m². Ceny bez DPH a bez materiálu.",
   },
   {
-    question: "Je vaše firma pojištěna proti poškození majetku?",
-    answer: "Ano, jsme plně pojištění pro případ jakýchkoliv škod během realizace. Pojištění odpovědnosti kryje případné škody na vašem majetku i v sousedních bytech.",
+    question: "Pokládáte i přírodní kámen?",
+    answer:
+      "Ano. V Ostravě a okolí pokládáme žulu, mramor, travertin, břidlici i vápenec. Ceny pokládky 900–1 600 Kč/m² podle druhu kamene a náročnosti. Nabízíme kuchyňské desky, parapety, obložení krbů, fasády i obklady koupelen.",
   },
   {
-    question: "Jakou záruku poskytujete na odvedenou práci?",
-    answer: "Na všechny práce poskytujeme nadstandardní záruku 60 měsíců. Záruka se vztahuje na veškeré instalatérské, obkladačské a stavební práce.",
+    question: "Zajišťujete i bourání a odvoz suti?",
+    answer:
+      "Ano, kompletně. V Ostravě přistavíme kontejner k domu, bouráme umakartová jádra, staré obklady i dlažby. Suť (typicky 200–400 kg) odvezeme na skládku. Vše v ceně rekonstrukce.",
   },
   {
-    question: "Pracujete i o víkendech?",
-    answer: "Standardně pracujeme v pracovních dnech. Zaměření však můžeme po dohodě provést i o víkendu. V případě urgentních projektů lze domluvit i víkendové práce.",
+    question: "Máte vzorkovnu v Ostravě?",
+    answer:
+      "Máme partnerské vzorkovny — SIKO Ostrava (Rudná), Koupelny Ptáček Ostrava-Zábřeh, StavebninyPRO Poruba. Rádi vás na výběr obkladů osobně doprovodíme a poradíme s výběrem formátu, odstínu i protiskluzu.",
   },
 ];
+
+// FAQPage Schema.org for Rich Snippets
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -57,8 +81,13 @@ export function FAQ() {
 
   return (
     <Section id="faq" theme="light">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       <SectionHeader
-        title="Nejčastější dotazy"
+        title="Nejčastější dotazy — obklady Ostrava"
       />
 
       <div className="max-w-4xl mx-auto space-y-2 sm:space-y-4">

@@ -61,6 +61,33 @@ const articles = [
     readTime: "6 min",
     image: "/images/articles/velkoformatove-obklady.jpg",
   },
+  {
+    title: "Rekonstrukce koupelny v paneláku Ostrava — kompletní průvodce 2026",
+    description:
+      "Kompletní průvodce rekonstrukcí panelákové koupelny. Typy T06B, T08B, OP 1.11, postup krok za krokem, ceník 2026, chyby kterým se vyhnout.",
+    href: "/rady/rekonstrukce-koupelny-v-panelaku-ostrava",
+    date: "15. 4. 2026",
+    readTime: "14 min",
+    image: "/images/articles/rekonstrukce-koupelny-cena.jpg",
+  },
+  {
+    title: "Velkoformátové obklady vs. klasické — co vybrat",
+    description:
+      "Srovnání formátů 30×60 až 120×260. Ceny, pokládka, technické nároky, doporučení podle typu koupelny v Ostravě.",
+    href: "/rady/velkoformatove-obklady-vs-klasicke",
+    date: "17. 4. 2026",
+    readTime: "11 min",
+    image: "/images/articles/velkoformatova-dlazba.jpg",
+  },
+  {
+    title: "Přírodní kámen do koupelny — 7 typů, ceny a péče",
+    description:
+      "Žula, mramor, travertin, břidlice, vápenec, onyx, pískovec. Srovnání vlastností, nasákavosti, protiskluzu a cen 2026.",
+    href: "/rady/prirodni-kamen-do-koupelny",
+    date: "18. 4. 2026",
+    readTime: "13 min",
+    image: "/images/articles/kamenny-obklad-krbu.jpg",
+  },
 ];
 
 const jsonLd = {

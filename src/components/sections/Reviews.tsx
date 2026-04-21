@@ -6,21 +6,24 @@ import { Star } from "lucide-react";
 const reviews = [
   {
     name: "Martin Kovář",
-    nick: "@martinkovar",
-    photo: "https://randomuser.me/api/portraits/men/32.jpg",
+    location: "Ostrava-Poruba",
+    initials: "MK",
+    gradient: "from-[#6B7AE8] to-[#5A68D6]",
     text: "Koupelna vypadá přesně jako na 3D návrhu. Precizní práce, termín dodrželi na den. Cena se nezměnila ani o korunu. Konečně řemeslník, na kterého se dá spolehnout.",
   },
   {
     name: "Jana Svobodová",
-    nick: "@janasvo",
-    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    location: "Ostrava-Zábřeh",
+    initials: "JS",
+    gradient: "from-[#E8A86B] to-[#D6925A]",
     text: "Rekonstrukce bytového jádra proběhla bez problémů. Pán přijel, zaměřil, dal přesnou cenu a tu i dodržel. Za 18 dní hotovo. Doporučuji všem v Ostravě.",
   },
   {
     name: "Tomáš Procházka",
-    nick: "@tprochazka",
-    photo: "https://randomuser.me/api/portraits/men/75.jpg",
-    text: "Kamenný krb předčil naše očekávání. Přírodní kámen vypadá luxusně. Sousedi závidí a ptají se na kontakt. Záruka 5 let je super bonus.",
+    location: "Havířov",
+    initials: "TP",
+    gradient: "from-[#6BE8A8] to-[#5AD692]",
+    text: "Kamenný krb předčil naše očekávání. Přírodní kámen vypadá luxusně. Sousedi závidí a ptají se na kontakt. Záruka 60 měsíců je super bonus.",
   },
 ];
 
@@ -35,38 +38,36 @@ export function Reviews() {
           viewport={{ once: true }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Co říkají naši zákazníci
+            Co říkají naši zákazníci v Ostravě
           </h2>
           <p className="text-gray-400 text-sm sm:text-base">
-            127 hodnocení · průměr 4,9 z 5
+            127 hodnocení · průměr 4,9/5 · verifikováno Google
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {reviews.map((review, index) => (
             <motion.div
-              key={review.nick}
+              key={review.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
             >
               <div className="bg-white rounded-3xl border border-gray-200/80 p-5 sm:p-6 h-full flex flex-col shadow-sm">
-                {/* Header: photo + name + stars */}
+                {/* Header: avatar initials + name + stars */}
                 <div className="flex items-center gap-3 mb-4">
-                  <img
-                    src={review.photo}
-                    alt={review.name}
-                    width={44}
-                    height={44}
-                    className="w-11 h-11 rounded-full object-cover flex-shrink-0"
-                    loading="lazy"
-                  />
+                  <div
+                    className={`w-11 h-11 rounded-full bg-gradient-to-br ${review.gradient} flex items-center justify-center text-white font-semibold text-sm flex-shrink-0`}
+                    aria-label={review.name}
+                  >
+                    {review.initials}
+                  </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-gray-900 text-sm leading-tight">
                       {review.name}
                     </p>
-                    <p className="text-gray-400 text-xs">{review.nick}</p>
+                    <p className="text-gray-400 text-xs">{review.location} · ověřeno Google</p>
                   </div>
                   <div className="flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
