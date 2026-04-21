@@ -88,6 +88,15 @@ const articles = [
     readTime: "13 min",
     image: "/images/articles/kamenny-obklad-krbu.jpg",
   },
+  {
+    title: "Cena rekonstrukce koupelny v Ostravě 2026 — reálný rozpočet",
+    description:
+      "Reálné ceny podle velikosti (4, 6, 10 m²), materiálů a úrovně. Rozpis kam jdou peníze, skryté náklady, jak ušetřit.",
+    href: "/rady/cena-rekonstrukce-koupelny-ostrava-2026",
+    date: "21. 4. 2026",
+    readTime: "15 min",
+    image: "/images/articles/cena-rekonstrukce-2026.jpg",
+  },
 ];
 
 const jsonLd = {

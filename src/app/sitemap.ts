@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/rady/rekonstrukce-koupelny-v-panelaku-ostrava", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/rady/velkoformatove-obklady-vs-klasicke", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/rady/prirodni-kamen-do-koupelny", priority: 0.8, changeFrequency: "monthly" as const },
+    { url: "/rady/cena-rekonstrukce-koupelny-ostrava-2026", priority: 0.9, changeFrequency: "monthly" as const },
     { url: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
   ];
 

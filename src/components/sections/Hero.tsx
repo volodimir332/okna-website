@@ -178,7 +178,7 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Reviews social proof — below button, left side */}
+          {/* Trust signal — honest experience, no fake ratings */}
           <motion.div
             className="self-start ml-2 sm:-ml-12 lg:-ml-[160px] mt-32 sm:mt-16"
             initial={{ opacity: 0, x: -20 }}
@@ -186,19 +186,15 @@ export function Hero() {
             transition={{ delay: 2.5, duration: 0.4 }}
           >
             <div className="flex items-center gap-3">
-              <div className="flex" style={{ marginRight: 4 }}>
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#6B7AE8] to-[#5A68D6] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-30" aria-label="Martin Kovář">MK</div>
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#E8A86B] to-[#D6925A] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-20" style={{ marginLeft: -18 }} aria-label="Jana Svobodová">JS</div>
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-[#6BE8A8] to-[#5AD692] flex items-center justify-center text-white text-[10px] sm:text-xs font-semibold relative z-10" style={{ marginLeft: -18 }} aria-label="Tomáš Procházka">TP</div>
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/30">
+                <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
               </div>
               <div>
-                <div className="flex gap-0.5 mb-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-[10px] sm:text-xs text-white/70 font-medium">
-                  127 hodnocení · 4,9/5
+                <p className="text-xs sm:text-sm text-white/90 font-semibold leading-tight">
+                  15+ let precizní práce
+                </p>
+                <p className="text-[10px] sm:text-xs text-white/60">
+                  500+ projektů v Moravskoslezském kraji
                 </p>
               </div>
             </div>

@@ -1,92 +1,60 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
-
-const reviews = [
-  {
-    name: "Martin Kovář",
-    location: "Ostrava-Poruba",
-    initials: "MK",
-    gradient: "from-[#6B7AE8] to-[#5A68D6]",
-    text: "Koupelna vypadá přesně jako na 3D návrhu. Precizní práce, termín dodrželi na den. Cena se nezměnila ani o korunu. Konečně řemeslník, na kterého se dá spolehnout.",
-  },
-  {
-    name: "Jana Svobodová",
-    location: "Ostrava-Zábřeh",
-    initials: "JS",
-    gradient: "from-[#E8A86B] to-[#D6925A]",
-    text: "Rekonstrukce bytového jádra proběhla bez problémů. Pán přijel, zaměřil, dal přesnou cenu a tu i dodržel. Za 18 dní hotovo. Doporučuji všem v Ostravě.",
-  },
-  {
-    name: "Tomáš Procházka",
-    location: "Havířov",
-    initials: "TP",
-    gradient: "from-[#6BE8A8] to-[#5AD692]",
-    text: "Kamenný krb předčil naše očekávání. Přírodní kámen vypadá luxusně. Sousedi závidí a ptají se na kontakt. Záruka 60 měsíců je super bonus.",
-  },
-];
+import { Star, ExternalLink } from "lucide-react";
 
 export function Reviews() {
   return (
     <section className="py-12 sm:py-16 md:py-24 bg-[#FAFAFA]">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <motion.div
-          className="text-center mb-8 sm:mb-12"
+          className="text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Co říkají naši zákazníci v Ostravě
+          <div className="flex justify-center gap-1 mb-4">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="w-6 h-6 text-amber-400" strokeWidth={1.5} />
+            ))}
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Nově sbíráme recenze na Google
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base">
-            127 hodnocení · průměr 4,9/5 · verifikováno Google
+
+          <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Po 15+ letech řemeslné práce v Ostravě začínáme být aktivní online.
+            Pokud jste byli našimi klienty, budeme vděční za vaši zpětnou
+            vazbu na Google — pomůže to dalším lidem v Moravskoslezském kraji
+            vybrat spolehlivého obkladače.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8">
+            <a
+              href="https://g.page/r/obklady-ostrava/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6B7AE8] text-white rounded-xl font-semibold hover:bg-[#5A68D6] transition-colors"
+            >
+              <Star className="w-4 h-4 fill-white" />
+              Ohodnotit nás na Google
+              <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+            </a>
+            <a
+              href="/realizace"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-900 rounded-xl font-semibold hover:border-gray-900 transition-colors"
+            >
+              Prohlédnout naše realizace
+            </a>
+          </div>
+
+          <p className="text-sm text-gray-500 max-w-xl mx-auto">
+            Věříme v transparentnost. Místo vymyšlených citátů vám raději
+            ukážeme naši práci — přes 500 dokončených projektů v Ostravě
+            a okolí za posledních 15+ let.
           </p>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-          {reviews.map((review, index) => (
-            <motion.div
-              key={review.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-            >
-              <div className="bg-white rounded-3xl border border-gray-200/80 p-5 sm:p-6 h-full flex flex-col shadow-sm">
-                {/* Header: avatar initials + name + stars */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className={`w-11 h-11 rounded-full bg-gradient-to-br ${review.gradient} flex items-center justify-center text-white font-semibold text-sm flex-shrink-0`}
-                    aria-label={review.name}
-                  >
-                    {review.initials}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 text-sm leading-tight">
-                      {review.name}
-                    </p>
-                    <p className="text-gray-400 text-xs">{review.location} · ověřeno Google</p>
-                  </div>
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Review text */}
-                <p className="text-gray-700 text-sm leading-relaxed flex-1">
-                  {review.text}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
