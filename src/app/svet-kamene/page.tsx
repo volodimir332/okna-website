@@ -188,14 +188,10 @@ export default function SvetKamenePage() {
 
         <RelatedLinks
           links={[
-            {
-              title: "Rekonstrukce koupelny",
-              href: "/sluzby/rekonstrukce-koupelny",
-            },
-            {
-              title: "Velkoformátové obklady",
-              href: "/sluzby/velkoformatove-obklady",
-            },
+            { title: "Travertin — pokládka a ceny", href: "/svet-kamene/travertin" },
+            { title: "Přírodní kámen do koupelny — 7 typů", href: "/rady/prirodni-kamen-do-koupelny" },
+            { title: "Rekonstrukce koupelny", href: "/sluzby/rekonstrukce-koupelny" },
+            { title: "Velkoformátové obklady", href: "/sluzby/velkoformatove-obklady" },
             { title: "Ceník obkladačských prací", href: "/cenik" },
             { title: "Naše realizace", href: "/realizace" },
           ]}

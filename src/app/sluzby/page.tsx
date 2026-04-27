@@ -54,6 +54,12 @@ const services = [
     desc: "Elektrické i teplovodní topení pod dlažbu. Ideální pro koupelny. Regulace po místnostech.",
     price: "od 1 100 Kč/m²",
   },
+  {
+    title: "Oprava obkladů a dlažby",
+    href: "/sluzby/oprava-obkladu",
+    desc: "Výměna prasklé dlaždice, přespárování, oprava silikonu. Mikroopravy bez bourání.",
+    price: "od 350 Kč",
+  },
 ];
 
 const faqItems = [
